@@ -241,9 +241,52 @@ Now exit the MySQL shell with:
 
 You can test if the new user has the proper permissions by logging in to the MySQL console again, this time using the custom user credentials:
 
+`mysql> SHOW DATABASES;`
+
+The output is displayed below:
+
+<img width="676" alt="file" src="https://user-images.githubusercontent.com/29310552/151030618-d96730c1-1d97-413e-a28f-e11d4bd1f4eb.PNG">
+
+`CREATE TABLE example_database.todo_list (item_id INT AUTO_INCREMENT,content VARCHAR(255),PRIMARY KEY(item_id));`
+
+Insert a few rows of content in the test table. You might want to repeat the next command a few times, using different VALUES
+
+`mysql> INSERT INTO example_database.todo_list (content) VALUES ("My first important item")`
+
+<img width="676" alt="file1" src="https://user-images.githubusercontent.com/29310552/151031673-0f158087-65ba-4851-8705-3320ccabb63d.PNG">
 
 
+To confirm that the data was successfully saved to our table, run:
 
+`mysql>  SELECT * FROM example_database.todo_list;`
+
+
+<img width="676" alt="file2" src="https://user-images.githubusercontent.com/29310552/151031631-398d00fe-3502-4682-8eb1-97e93be66f36.PNG">
+
+After confirming that you have valid data in your test table, you can exit the MySQL console
+
+`mysql> exit`
+
+Now you can create a PHP script that will connect to MySQL and query for your content. Create a new PHP file in your custom web root directory using your preferred editor. We’ll use vi for that:
+
+`$ nano /var/www/projectLEMP/todo_list.php`
+
+Copy this content into your todo_list.php script:
+
+
+<img width="675" alt="info-web" src="https://user-images.githubusercontent.com/29310552/151033302-c9e475d6-2a3d-4630-bbbf-aa48438da702.PNG">
+
+
+Save the script and continue
+
+You can now access this page in your web browser by visiting the domain name or public IP address configured for your website, followed by /todo_list.php:
+
+`http://<Public_domain_or_IP>/todo_list.php`
+
+<img width="433" alt="todo" src="https://user-images.githubusercontent.com/29310552/151033683-aebd7b10-ff3a-4787-b050-a4dacc91a231.PNG">
+
+
+This project was done using the materials from [Darey.io](https://www.darey.io/)
 
 
 
