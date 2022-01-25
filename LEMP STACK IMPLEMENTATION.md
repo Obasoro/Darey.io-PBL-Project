@@ -44,6 +44,7 @@
  We can check the webserver is up and running by running these two command. The would give us same result.
  
 `$ curl http://localhost:80`
+
 <img width="534" alt="localhost" src="https://user-images.githubusercontent.com/29310552/150982720-967e039f-681a-4de7-a3bb-bcf21af22c52.PNG">
 
 or
@@ -109,7 +110,7 @@ We can now install mysql by running this command
 
 Our MySQL server is now installed and secured. Next, we will install PHP, the final component in the LEMP stack
 
-# Step 4: INSTALLING PHP
+# Step 3: INSTALLING PHP
 
 You have Nginx installed to serve your content and MySQL installed to store and manage your data. Now you can install PHP to process code and generate dynamic content for the web server.
 
@@ -175,8 +176,76 @@ Now go to the browser and try to open the website URL using IP address:
 
 We can see our nginx server is up and running
 
+# Step 5: TESTING PHP WITH NGINX
+
+Both LAMP and LEMP stack are fully functional and operational
+
+We can test by trying if the nginx can hand .php files to a processor
+
+We can do this by creating a test PHP file in your document root. Open a new file called info.php within your document root in your text editor by runnng this command
+
+`$ sudo nano /var/www/projectLEMP/info.php`
+
+<img width="674" alt="phpinfo" src="https://user-images.githubusercontent.com/29310552/151009401-bf64ad95-22ef-4341-8009-a69da98aa52d.PNG">
+
+
+The namo editor is dsiplayed and can copy this command and paste inside the editor
+
+`<?php
+phpinfo();`
+
+
+We can now access this page in your web browser by visiting the domain name or public IP address you’ve set up in your Nginx configuration file, followed by /info.php:
+
+`http://`server_domain_or_IP`/info.php`
+
+<img width="827" alt="phppage" src="https://user-images.githubusercontent.com/29310552/151009413-27f6b06c-d843-4d0f-9dce-b400add26669.PNG">
+
+After checking the relevant information about your PHP server through that page, it’s best to remove the file you created as it contains sensitive information about your PHP environment and your Ubuntu server. You can use rm to remove that file:
+
+`sudo rm /var/www/your_domain/info.php`
+
+
+# Step 6: RETRIEVING DATA FROM MYSQL DATABASE WITH PHP
 
  
+In this step we created a test database (DB) with simple "To do list" and configure access to it, so the Nginx website would be able to query data from the DB and display it.
+
+We will create a database named example_database and a user named example_user, but can replace these names with different values.
+
+First, connect to the MySQL console using the root account by running this command
+
+`$ sudo mysql`
+
+<img width="672" alt="php load" src="https://user-images.githubusercontent.com/29310552/151027744-8fb5f7e5-0f5d-40de-8b26-4ae3a58c62b0.PNG">
+
+
+To create a new database, run the following command from your MySQL console:
+
+`mysql> CREATE DATABASE `example_database`;`
+
+Now you can create a new user and grant him full privileges on the database you have just created. The following command creates a new user named example_user, using mysql_native_password as default authentication method. We’re defining this user’s password as password, but you should replace this value with a secure password of your own choosing.
+
+`mysql>  CREATE USER 'example_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';`
+
+
+<img width="673" alt="config sql" src="https://user-images.githubusercontent.com/29310552/151027906-0a97418b-984c-42d6-a3ea-2f265aa6960e.PNG">
+
+Now we need to give this user permission over the example_database database:
+
+`mysql> GRANT ALL ON example_database.* TO 'example_user'@'%';`
+
+Now exit the MySQL shell with:
+
+`mysql> exit`
+
+You can test if the new user has the proper permissions by logging in to the MySQL console again, this time using the custom user credentials:
+
+
+
+
+
+
 
  
 
