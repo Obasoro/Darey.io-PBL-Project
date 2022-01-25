@@ -125,6 +125,29 @@ A Yes prompt would be show within the script, type y to complete the process of 
 
 # Step 4: CONFIGURING NGINX TO USE PHP PROCESSOR
 
+When using the Nginx web server, we can create server blocks (similar to virtual hosts in Apache) to encapsulate configuration details and host more than one domain on a single server. In this guide, we will use projectLEMP as an example domain name.
+
+On Ubuntu 20.04, Nginx has one server block enabled by default and is configured to serve documents out of a directory at /var/www/html. While this works well for a single site, it can become difficult to manage if you are hosting multiple sites. Instead of modifying /var/www/html, we’ll create a directory structure within /var/www for the your_domain website, leaving /var/www/html in place as the default directory to be served if a client request does not match any other sites.
+
+To create a root web directory to the domain site, run the code below 
+
+`$ sudo mkdir /var/www/projectLEMP`
+
+We need to assign $USER ownrship within the $USER environmentt. With this we can reference the current system user
+
+`$ sudo chown -R $USER:$USER /var/www/projectLEMP`
+
+
+We are going to use NANO editor to open a new configuration file using this command
+
+`$ sudo nano /etc/nginx/sites-available/projectLEMP`
+
+
+<img width="480" alt="nano-edit" src="https://user-images.githubusercontent.com/29310552/151001662-1e503541-e0b2-42ee-a330-9e6f46830c7e.PNG">
+
+Activate your configuration by linking to the config file from Nginx’s sites-enabled directory:
+
+`sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/`
 
  
 
