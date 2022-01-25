@@ -40,6 +40,32 @@
  `$ sudo systemctl status nginx`
  
  <img width="531" alt="sudo-system-nginx" src="https://user-images.githubusercontent.com/29310552/150981305-8a6f6fc1-7337-4190-b3e5-b1a8bafe78c1.PNG">
+ 
+ We can check the webserver is up and running by running these two command. The would give us same result.
+ 
+`$ curl http://localhost:80`
+<img width="534" alt="localhost" src="https://user-images.githubusercontent.com/29310552/150982720-967e039f-681a-4de7-a3bb-bcf21af22c52.PNG">
+
+or
+
+`$ curl http://127.0.0.1:80`
+
+<img width="528" alt="port80" src="https://user-images.githubusercontent.com/29310552/150982783-fb7bacb8-5fc2-40ff-98ee-980777104240.PNG">
+
+Now it is time for us to test how our Nginx server can respond to requests from the Internet.
+Open a web browser of your choice and try to access following url
+
+`http://<Public-IP-Address>:80`
+
+<img width="711" alt="nginxIP-80" src="https://user-images.githubusercontent.com/29310552/150983197-7af5a3b8-aad3-41b0-9ada-ae7ce0f2c9b5.PNG">
+
+Another way to retrieve your Public IP address, other than to check it in AWS Web console, is to use following command:
+
+
+
+
+
+ 
 
  
 
