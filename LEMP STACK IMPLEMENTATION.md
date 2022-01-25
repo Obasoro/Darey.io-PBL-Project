@@ -21,6 +21,30 @@
   - copy the SSH command and paste
   - ![VM on gtbas](https://user-images.githubusercontent.com/29310552/150978457-c06a6815-b4f3-41e2-8728-96d8ff8ac347.JPG)
 
+# Step 1: INSTALLING THE NGINX WEB SERVER
+
+ In order to display web pages to our site visitors, we are going to employ Nginx, a high-performance web  server. We’ll use the apt package manager to install this package.
+
+ We would start by updating the created ubuntu instance on AWS using the following command line
+ 
+ `$ sudo apt update`
+ 
+ <img width="531" alt="Sudo-apt-update" src="https://user-images.githubusercontent.com/29310552/150980851-12b35cb7-3989-4c43-8f99-d1b7158e81ac.PNG">
+ 
+ We would now install the nginx web server using this command
+ 
+ `$ sudo apt install nginx`
+  
+ We would comfirm if the nginx server is now running and active by running this command
+ 
+ `$ sudo systemctl status nginx`
+ 
+ <img width="531" alt="sudo-system-nginx" src="https://user-images.githubusercontent.com/29310552/150981305-8a6f6fc1-7337-4190-b3e5-b1a8bafe78c1.PNG">
+
+ 
+
+
+
 
 
 
