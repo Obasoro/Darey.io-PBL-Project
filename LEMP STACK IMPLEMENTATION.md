@@ -101,6 +101,29 @@ Press y|Y for Yes, any other key for No:
 
 Type y (Yes) for all and also Enter
 
+We can now install mysql by running this command
+
+`$ sudo mysql`
+
+<img width="635" alt="sudo-mysql" src="https://user-images.githubusercontent.com/29310552/150989110-d4d6c4ef-540d-4dac-bc0d-b1c8ac2bc6e2.PNG">
+
+Our MySQL server is now installed and secured. Next, we will install PHP, the final component in the LEMP stack
+
+# Step 4: INSTALLING PHP
+
+You have Nginx installed to serve your content and MySQL installed to store and manage your data. Now you can install PHP to process code and generate dynamic content for the web server.
+
+While Apache embeds the PHP interpreter in each request, Nginx requires an external program to handle PHP processing and act as a bridge between the PHP interpreter itself and the web server. This allows for a better overall performance in most PHP-based websites, but it requires additional configuration.
+
+Two libraries would installed simultaneously using this command
+
+`$ sudo apt install php-fpm php-mysql`
+
+<img width="672" alt="php load" src="https://user-images.githubusercontent.com/29310552/150990111-e7f909ed-e720-4d6e-93d2-11bf21ad431a.PNG">
+
+A Yes prompt would be show within the script, type y to complete the process of installation
+
+# Step 4: CONFIGURING NGINX TO USE PHP PROCESSOR
 
 
  
