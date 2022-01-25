@@ -61,7 +61,45 @@ Open a web browser of your choice and try to access following url
 
 Another way to retrieve your Public IP address, other than to check it in AWS Web console, is to use following command:
 
+`curl -s http://169.254.169.254/latest/meta-data/public-ipv4`
 
+
+# Step 2: INSTALLING MYSQL
+
+Now that you have a web server up and running, you need to install a Database Management System (DBMS) to be able to store and manage data for your site
+
+`$ sudo apt instal mysql-server`
+
+<img width="675" alt="mysql-sever" src="https://user-images.githubusercontent.com/29310552/150987377-113d116e-4156-458d-b50b-d87e63faaffd.PNG">
+
+When prompted, confirm installation by typing Y, and then ENTER.
+
+After completion of the installation
+
+To secure your mysql, we would need to run the following command
+
+`sudo mysql_secure_installation`
+
+<img width="674" alt="msql -yes-1" src="https://user-images.githubusercontent.com/29310552/150987463-35040d4b-9a60-4d97-aa24-2efbabb55ece.PNG">
+
+This would prompt different question on security and passwords. 
+
+`**Note:** Enabling this feature is something of a judgment call. If enabled, passwords which don’t match the specified criteria will be rejected by MySQL with an error. It is safe to leave validation disabled, but you should always use strong, unique passwords for database credentials.`
+
+`VALIDATE PASSWORD PLUGIN can be used to test passwords
+and improve security. It checks the strength of password
+and allows the users to set only those passwords which are
+secure enough. Would you like to setup VALIDATE PASSWORD plugin?`
+
+<img width="673" alt="msql -yes-2" src="https://user-images.githubusercontent.com/29310552/150987527-f119756e-f601-4985-82c2-690aa4067801.PNG">
+
+<img width="673" alt="3" src="https://user-images.githubusercontent.com/29310552/150987551-272a88ec-3ac3-42b7-b44b-87e20a73f870.PNG">
+
+
+Press y|Y for Yes, any other key for No:
+
+
+Type y (Yes) for all and also Enter
 
 
 
