@@ -30,3 +30,26 @@ Mobaxterm allows for multiple session with the CLI environment.
 
 <img width="979" alt="Mobaxterm" src="https://user-images.githubusercontent.com/29310552/151159278-0783304d-ab65-4726-afa6-065b53e3f540.PNG">
 
+ - # Using Mobaxterm to connect to EC2 Instance
+  - Download the Mobaxterm and click the option you prfer, free or paid, depending on what you intend achieving
+  - Click the app to initiate the process of using it
+  - <img width="979" alt="Mobaxterm" src="https://user-images.githubusercontent.com/29310552/151161089-284c9ff1-222b-47d3-bcf6-880a1e85a100.PNG">
+  - Click new session icon on the extreme left tab of the Application
+  - Click SSH
+  - Paste the IP address of EC2 at the remote name on as displayed and write the preferred name of your instance
+  - Click the advance setting on the middle of the application
+  - Click private key, select the location of the private key on your system and load.
+  - Click ok
+  - <img width="641" alt="ssh-moba" src="https://user-images.githubusercontent.com/29310552/151162823-9635fdfd-bbbd-4f03-88ba-ca9a2c61403d.PNG">
+  - The Ubuntu system is upon running on your system 
+  - <img width="680" alt="ubuntu-moba" src="https://user-images.githubusercontent.com/29310552/151162869-d5d3f76a-2d61-480e-b3c0-824af8255102.PNG">
+
+
+
+
+  
+  - 
+
+
+
+
