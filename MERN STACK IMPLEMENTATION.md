@@ -138,7 +138,8 @@ Run the ls command and Install the dotenv module
  
 Open the index.js file with the command below and paste the following code:
  
-`const express = require('express');
+`
+const express = require('express');
 require('dotenv').config();
 
 const app = express();
@@ -157,22 +158,192 @@ res.send('Welcome to Express');
 
 app.listen(port, () => {
 console.log(`Server running on port ${port}`)
-});`
+}); 
+`
  
 <img width="500" alt="paste to do express" src="https://user-images.githubusercontent.com/29310552/151193974-7e757b58-4648-40d8-9327-f0ed5824a83c.PNG">
 
+ 
+Notice that we have specified to use port 5000 in the code. This will be required later when we go on the browser.
+ 
+To save press *esc* and *:wq*
+ 
+Now it is time to start our server to see if it works. Open your terminal in the same directory as your index.js file and type:
+
+`$ node index.js`
+ 
+<img width="500" alt="Capture" src="https://user-images.githubusercontent.com/29310552/151195738-50dbd234-9ecc-4706-b7db-0a926d651440.PNG">
+
+After setting the **Imbound** rules on the EC2 console
+ 
+<img width="754" alt="imbound rule" src="https://user-images.githubusercontent.com/29310552/151195964-71edbc4c-2f63-4b48-a441-0d1f71987eba.PNG">
+ 
+Open up your browser and try to access your server’s Public IP or Public DNS name followed by port 5000:
+ 
+`http://<PublicIP-or-PublicDNS>:5000`
+
+<img width="589" alt="ip5000" src="https://user-images.githubusercontent.com/29310552/151196372-1b763681-07d9-4d9f-98c8-5f4e98f4ab2f.PNG">
+ 
+*Quick reminder how to get your server’s Public IP and public DNS name:*
+1) You can find it in your AWS web console in EC2 details
+*2) Run curl -s http://169.254.169.254/latest/meta-data/public-ipv4 for Public IP address or*
+*3) Run curl -s http://169.254.169.254/latest/meta-data/public-hostname for Public DNS name.*
+
+
+# Routes
+ 
+There are three actions that our To-Do application needs to be able to do:
+
+- Create a new task
+- Display list of all tasks
+- Delete a completed task
+
+If you are working on Mobaxterm, and the port 5000 is running, don't end the the process, click another session to continue:
+ 
+<img width="681" alt="new session" src="https://user-images.githubusercontent.com/29310552/151203501-c94effe7-40be-4bc4-b610-7bec79f825e8.PNG">
+ 
+Each task will be associated with some particular endpoint and will use different standard HTTP request methods: POST, GET, DELETE.
+
+For each task, we need to create routes that will define various endpoints that the To-do app will depend on. So let us create a folder routes
+ 
+`mkdir routes`
+ 
+*Tip*: You can open multiple shells in Putty or Linux/Mac to connect to the same EC2
+
+Change directory to routes folder.
+ 
+`$ cd routes`
+ 
+ Now we can create a file called api.js with the command below
+
+ `touch api.js`
+ 
+Open the file with the command below
+ 
+<img width="505" alt="files-route-api" src="https://user-images.githubusercontent.com/29310552/151206753-231aa387-aa38-4d24-bca7-11517fc8dd47.PNG">
+
+ 
+`$ vim api.js`
+ 
+Paste the following code inside the vim editor
+ 
+`
+const express = require ('express');
+const router = express.Router();
+
+router.get('/todos', (req, res, next) => {
+
+});
+
+router.post('/todos', (req, res, next) => {
+
+});
+
+router.delete('/todos/:id', (req, res, next) => {
+
+})
+
+module.exports = router;
+`
+<img width="450" alt="vim-route" src="https://user-images.githubusercontent.com/29310552/151206566-d6e43e20-1b5e-45f9-a368-5b93208a397b.PNG">
+
+Moving forward let create Models directory.
+ 
+# Model
+ 
+Now comes the interesting part, since the app is going to make use of Mongodb which is a NoSQL database, we need to create a model.
+
+A model is at the heart of JavaScript based applications, and it is what makes it interactive.
+
+We will also use models to define the database schema . This is important so that we will be able to define the fields stored in each Mongodb document
+ 
+To create a Schema and a model, install mongoose which is a Node.js package that makes working with mongodb easier.
+
+Change directory back Todo folder with cd .. and install Mongoose
+ 
+`$ npm install mongoose`
+ 
+<img width="685" alt="mongoose -install" src="https://user-images.githubusercontent.com/29310552/151211007-c82bca2a-901d-4050-8b73-73ca2c73d3e4.PNG">
+ 
+You can run the following command one after the other or run it concurrently
+ 
+Create a new folder models :
+ 
+`$ mkdir models`
+ 
+`$ cd models`
+ 
+`$ touch todo.js`
+ 
+*Tip*: All three commands above can be defined in one line to be executed consequently with help of && operator, like this:
+
+`$ mkdir models && cd models && touch todo.js`
+ 
+`$ vim todo.js`
+ 
+
+` 
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+//create schema for todo
+const TodoSchema = new Schema({
+action: {
+type: String,
+required: [true, 'The todo text field is required']
+}
+})
+
+//create model for todo
+const Todo = mongoose.model('todo', TodoSchema);
+
+module.exports = Todo;
+`
+
+ <img width="463" alt="vim todo" src="https://user-images.githubusercontent.com/29310552/151213865-9281cfd3-b044-42c2-9430-bdb190895aec.PNG">
 
 
  
+Navigate to *api.js* location and open it through the vim editor
+
+Delete the code within using the :%d within the vim editor
  
+Copy and paste this code within the vim editor
  
+`
+const express = require ('express');
+const router = express.Router();
+const Todo = require('../models/todo');
 
+router.get('/todos', (req, res, next) => {
 
+//this will return all the data, exposing only the id and action field to the client
+Todo.find({}, 'action')
+.then(data => res.json(data))
+.catch(next)
+});
 
+router.post('/todos', (req, res, next) => {
+if(req.body.action){
+Todo.create(req.body)
+.then(data => res.json(data))
+.catch(next)
+}else {
+res.json({
+error: "The input field is empty"
+})
+}
+});
 
-  
-  - 
+router.delete('/todos/:id', (req, res, next) => {
+Todo.findOneAndDelete({"_id": req.params.id})
+.then(data => res.json(data))
+.catch(next)
+})
 
-
+module.exports = router;
+ 
+`<img width="538" alt="api vim" src="https://user-images.githubusercontent.com/29310552/151213703-e958e7b0-eb8f-43aa-a293-6e289639136b.PNG">
+ 
 
 
