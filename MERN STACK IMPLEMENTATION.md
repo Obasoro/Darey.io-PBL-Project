@@ -18,3 +18,15 @@
 **culled from** [GeeksforGeeks](https://www.geeksforgeeks.org/mern-stack/)
 
 For this **Project 3** we would be using the *Mobaxterm* to connect to our *Ubuntu* VM created on **AWS**
+
+## Step 0: Preparing prerequisites
+
+ - Long on on to your **AWS** account to create an instance on *EC2*
+ - For the procedure to create an Instance click on [Darey.io](https://www.youtube.com/watch?v=xxKuB9kJoYM)
+ - Save the downlaoded private key within a folder
+For **Windows** users, apart from Window subsystem Linux (WSL), Gitbash and PuttyGen App, we could also use Mobaxterm App to connect.
+
+Mobaxterm allows for multiple session with the CLI environment.
+
+<img width="979" alt="Mobaxterm" src="https://user-images.githubusercontent.com/29310552/151159278-0783304d-ab65-4726-afa6-065b53e3f540.PNG">
+
