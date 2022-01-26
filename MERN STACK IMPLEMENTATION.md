@@ -346,4 +346,11 @@ module.exports = router;
 `<img width="538" alt="api vim" src="https://user-images.githubusercontent.com/29310552/151213703-e958e7b0-eb8f-43aa-a293-6e289639136b.PNG">
  
 
+# Step 4: MONGODB DATABASE
+ 
+*MongoDB Database*
+ 
+We need a database where we will store our data. For this we will make use of mLab. mLab provides MongoDB database as a service solution
+ 
+
 
