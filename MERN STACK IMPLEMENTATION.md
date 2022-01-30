@@ -483,6 +483,240 @@ In running the first command, the React-App could  not create the client directo
  
 `$ sudo apt-get install -y nodejs`
  
+-3. Add the key value pair in the package.json file "proxy": "http://localhost:5000"
+ 
+<img width="462" alt="packag-500" src="https://user-images.githubusercontent.com/29310552/151701538-0be260a7-9a93-416f-9f76-c7d8b7dfbec1.PNG">
+ 
+Go back to Todo directory and run this command
+ 
+`$ npm run dev`
+ 
+<img width="496" alt="npm-dev" src="https://user-images.githubusercontent.com/29310552/151701721-21723490-c4f8-42ec-8c81-c172a6af360e.PNG">
+ 
+Your server is now running ol localhost:3000
+ 
+<img width="731" alt="running react" src="https://user-images.githubusercontent.com/29310552/151701931-a0f1c76f-704d-4194-a946-454e4bf6cdda.PNG">
+
+ 
+**Important note**: In order to be able to access the application from the Internet you have to open TCP port 3000 on EC2 by adding a new Security Group rule. You already know how to do it.
+ 
+<img width="843" alt="imboub" src="https://user-images.githubusercontent.com/29310552/151701834-ec913e34-ccde-44bd-be49-171afcc7d71b.PNG">
+ 
+## creating React Environment
+ 
+One of the advantages of react is that it makes use of components, which are reusable and also makes code modular. For our Todo app, there will be two stateful components and one stateless component.
+ 
+ -1. From your Todo directory run
+  
+  `$ cd client`
+ 
+-2. move to the src directory
+ 
+  `$ cd src`
+-3. Inside your src folder create another folder called components
+ 
+   $ mkdir components`
+
+-4. Move into the components directory with
+ 
+  `$ cd components`
+ 
+-5. Inside ‘components’ directory create three files Input.js, ListTodo.js and Todo.js.
+ 
+  `$ touch Input.js ListTodo.js Todo.js`
+ 
+-6. Open the Input.js and paste this code
+ 
+    `$ vi Input.js`
+ 
+ Copy and paste this code below
+ 
+ ```
+ 
+ import React, { Component } from 'react';
+import axios from 'axios';
+
+class Input extends Component {
+
+state = {
+action: ""
+}
+
+addTodo = () => {
+const task = {action: this.state.action}
+
+    if(task.action && task.action.length > 0){
+      axios.post('/api/todos', task)
+        .then(res => {
+          if(res.data){
+            this.props.getTodos();
+            this.setState({action: ""})
+          }
+        })
+        .catch(err => console.log(err))
+    }else {
+      console.log('input field required')
+    }
+
+}
+
+handleChange = (e) => {
+this.setState({
+action: e.target.value
+})
+}
+
+render() {
+let { action } = this.state;
+return (
+<div>
+<input type="text" onChange={this.handleChange} value={action} />
+<button onClick={this.addTodo}>add todo</button>
+</div>
+)
+}
+}
+
+export default Input
+ 
+```
+To make use of [Axios](https://github.com/axios/axios), which is a Promise based HTTP client for the browser and node.js, you need to cd into your client from your terminal and run yarn add axios or npm install axios.
+
+Move to the src folder
+ 
+`$ cd ..`
+ 
+Move to clients folder
+ 
+`$ cd ..`
+ 
+Install Axios
+ 
+`$ npm install axios`
+ 
+<img width="499" alt="axios" src="https://user-images.githubusercontent.com/29310552/151702832-92550e78-f206-4660-aff6-a3a20eaf7f14.PNG">
+
+ 
+Go to ‘components’ directory
+ 
+`$ cd src/components`
+ 
+ -1. After that open your ListTodo.js
+   `$ vi ListTodo.js`
+ 
+ -2. Copy and paste this code
+ 
+ ```
+ import React from 'react';
+
+const ListTodo = ({ todos, deleteTodo }) => {
+
+return (
+<ul>
+{
+todos &&
+todos.length > 0 ?
+(
+todos.map(todo => {
+return (
+<li key={todo._id} onClick={() => deleteTodo(todo._id)}>{todo.action}</li>
+)
+})
+)
+:
+(
+<li>No todo(s) left</li>
+)
+}
+</ul>
+)
+}
+
+export default ListTodo
+ 
+```
+ 
+-3.Then in your Todo.js file you write the following code (Copy and paste)
+ 
+  `$ vi Todo.js`
+ 
+```
+import React, {Component} from 'react';
+import axios from 'axios';
+
+import Input from './Input';
+import ListTodo from './ListTodo';
+
+class Todo extends Component {
+
+state = {
+todos: []
+}
+
+componentDidMount(){
+this.getTodos();
+}
+
+getTodos = () => {
+axios.get('/api/todos')
+.then(res => {
+if(res.data){
+this.setState({
+todos: res.data
+})
+}
+})
+.catch(err => console.log(err))
+}
+
+deleteTodo = (id) => {
+
+    axios.delete(`/api/todos/${id}`)
+      .then(res => {
+        if(res.data){
+          this.getTodos()
+        }
+      })
+      .catch(err => console.log(err))
+
+}
+
+render() {
+let { todos } = this.state;
+
+    return(
+      <div>
+        <h1>My Todo(s)</h1>
+        <Input getTodos={this.getTodos}/>
+        <ListTodo todos={todos} deleteTodo={this.deleteTodo}/>
+      </div>
+    )
+
+}
+}
+
+export default Todo;
+
+```
+ 
+We need to make little adjustment to our react code. Delete the logo and adjust our App.js to look like this.
+ 
+
+ 
+
+ 
+ ```
+ 
+  
+
+ 
+ 
+
+
+
+
+
+ 
  
 
 
