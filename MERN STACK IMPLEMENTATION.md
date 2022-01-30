@@ -439,6 +439,55 @@ Start the server by running this code
 <img width="670" alt="post-req" src="https://user-images.githubusercontent.com/29310552/151684896-256da998-b6aa-4037-bd2b-a0f7dcb10b2d.PNG">
  
 <img width="671" alt="get-pos" src="https://user-images.githubusercontent.com/29310552/151684903-eca0a919-6d79-47e5-9451-d952c72d5555.PNG">
+ 
+# Step 2 : FRONTEND CREATION
+ 
+Since we are done with the functionality we want from our backend and API, we would create a user interface for a Web client (browser) to interact with the application via API. To start out with the frontend of the To-do app, we will use the create-react-app command to scaffold our app.
+ 
+We would create a react-app in our Todo directory
+ 
+`$ npx create-react-app client`
+ 
+<img width="501" alt="react-installed" src="https://user-images.githubusercontent.com/29310552/151699391-5d1fb110-ed68-44d1-b0d3-1708a650c894.PNG">
+
+ 
+## Running a React App
+ 
+- 1. Install [Concurrently](https://www.npmjs.com/package/concurrently). This enable you to run more than one command simultaneosly
+- 2. Install [Nodemon](https://www.npmjs.com/package/nodemon). It is used to run and monitor the server. If there is any change in the server code, nodemon will restart it automatically and load the new changes.
+ <img width="497" alt="nodemon" src="https://user-images.githubusercontent.com/29310552/151699679-2df6026f-5d8c-4858-9717-134a89602210.PNG">
+
+- 3. In Todo folder open the package.json file. Change the highlighted part of the below screenshot and replace with the code below.
+ 
+```
+ "scripts": {
+"start": "node index.js",
+"start-watch": "nodemon index.js",
+"dev": "concurrently \"npm run start-watch\" \"cd client && npm start\""
+},
+ 
+```
+<img width="500" alt="vim-nodemon" src="https://user-images.githubusercontent.com/29310552/151699910-9eee129b-e0ba-4d06-9350-04056ef0ca35.PNG">
+ 
+### Configure the Proxy in Package.json
+
+-1. Change to the client directory
+
+  `$ cd client`
+ 
+-2. Open the package.json file
+ 
+  `$ vi package.json`
+ 
+In running the first command, the React-App could  not create the client directory due to version of nodejs. I had to upgrade to newer version by running
+ 
+`$ sudo apt-get install -y nodejs`
+ 
+ 
+
+
+ 
+ 
 
 
 
@@ -449,3 +498,4 @@ Start the server by running this code
  
 
 
+ 
