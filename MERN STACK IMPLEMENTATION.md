@@ -138,7 +138,7 @@ Run the ls command and Install the dotenv module
  
 Open the index.js file with the command below and paste the following code:
  
-`
+```
 const express = require('express');
 require('dotenv').config();
 
@@ -159,7 +159,7 @@ res.send('Welcome to Express');
 app.listen(port, () => {
 console.log(`Server running on port ${port}`)
 }); 
-`
+```
  
 <img width="500" alt="paste to do express" src="https://user-images.githubusercontent.com/29310552/151193974-7e757b58-4648-40d8-9327-f0ed5824a83c.PNG">
 
@@ -225,9 +225,10 @@ Open the file with the command below
  
 `$ vim api.js`
  
+ 
 Paste the following code inside the vim editor
  
-`
+```
 const express = require ('express');
 const router = express.Router();
 
@@ -244,7 +245,8 @@ router.delete('/todos/:id', (req, res, next) => {
 })
 
 module.exports = router;
-`
+ 
+```
 <img width="450" alt="vim-route" src="https://user-images.githubusercontent.com/29310552/151206566-d6e43e20-1b5e-45f9-a368-5b93208a397b.PNG">
 
 Moving forward let create Models directory.
@@ -282,7 +284,7 @@ Create a new folder models :
 `$ vim todo.js`
  
 
-` 
+```
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -298,7 +300,7 @@ required: [true, 'The todo text field is required']
 const Todo = mongoose.model('todo', TodoSchema);
 
 module.exports = Todo;
-`
+```
 
  <img width="463" alt="vim todo" src="https://user-images.githubusercontent.com/29310552/151213865-9281cfd3-b044-42c2-9430-bdb190895aec.PNG">
 
@@ -310,7 +312,7 @@ Delete the code within using the :%d within the vim editor
  
 Copy and paste this code within the vim editor
  
-`
+```
 const express = require ('express');
 const router = express.Router();
 const Todo = require('../models/todo');
@@ -343,6 +345,8 @@ Todo.findOneAndDelete({"_id": req.params.id})
 
 module.exports = router;
  
+```
+ 
 `<img width="538" alt="api vim" src="https://user-images.githubusercontent.com/29310552/151213703-e958e7b0-eb8f-43aa-a293-6e289639136b.PNG">
  
 
@@ -351,6 +355,97 @@ module.exports = router;
 *MongoDB Database*
  
 We need a database where we will store our data. For this we will make use of mLab. mLab provides MongoDB database as a service solution
+ 
+Log into the [mongodb](https://www.mongodb.com/cloud/atlas/lp/try2?utm_source=google&utm_campaign=gs_emea_nigeria_search_core_brand_atlas_desktop&utm_term=mongodb%20atlas%20login&utm_medium=cpc_paid_search&utm_ad=e&utm_ad_campaign_id=12212624539&adgroup=115749718503&gclid=Cj0KCQiA6NOPBhCPARIsAHAy2zCuSVQjuYblXZcppC6y8rBPRLZYT9bM9yIJCGRuQRDTniWRWbb4Q6oaAsuFEALw_wcB) and create a free account.
+ 
+Create a database and a cluster<img width="816" alt="Monggo-Db" src="https://user-images.githubusercontent.com/29310552/151682205-07c554bb-ee87-480b-8543-f3d91d28c0c6.PNG">
+ 
+<img width="582" alt="connect-db" src="https://user-images.githubusercontent.com/29310552/151682209-d5e1ddf4-8cc6-4c73-b572-5aad601f5106.PNG">
+ 
+Locate the directory `Todo` and create a `.env` file
+ 
+`$ touch .env`
+
+`$ vi .env`
+ 
+<img width="502" alt="vim-env" src="https://user-images.githubusercontent.com/29310552/151682266-0255b145-739c-4ebb-b9c5-48429a72610c.PNG">
+ 
+Paste the following code into vim editor
+
+`DB = 'mongodb+srv://<username>:<password>@<network-address>/<dbname>?retryWrites=true&w=majority'`
+ 
+Replace username with the username on mongo console, also the database name with dname, and password when creating the cluster
+ 
+We need to update the index.js to reflect the .env file we just created so we can connect with our database
+ 
+Open index.js file using vim or nano as you might prefer. Delete the existing file and copy and paste 
+ 
+```
+ const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const routes = require('./routes/api');
+const path = require('path');
+require('dotenv').config();
+
+const app = express();
+
+const port = process.env.PORT || 5000;
+
+//connect to the database
+mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
+.then(() => console.log(`Database connected successfully`))
+.catch(err => console.log(err));
+
+//since mongoose promise is depreciated, we overide it with node's promise
+mongoose.Promise = global.Promise;
+
+app.use((req, res, next) => {
+res.header("Access-Control-Allow-Origin", "\*");
+res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+next();
+});
+
+app.use(bodyParser.json());
+
+app.use('/api', routes);
+
+app.use((err, req, res, next) => {
+console.log(err);
+next();
+});
+
+app.listen(port, () => {
+console.log(`Server running on port ${port}`)
+});
+
+```
+Using environment variables to store information is considered more secure and best practice to separate configuration and secret data from the application, instead of writing connection strings directly inside the index.js application file
+ 
+Start the server by running this code
+ 
+`$ node index.js`
+ 
+<img width="499" alt="database connect" src="https://user-images.githubusercontent.com/29310552/151684203-20c0e85c-2990-4f4f-9e54-87ed37b1b4c4.PNG">
+ 
+### Testing Backend Code without Frontend using RESTful API
+ 
+- Download Postman
+- Install and initiate the process
+- Follow the instruction on this link [Postmant](https://www.youtube.com/watch?v=FjgYtQK_zLE)
+ 
+### Get and Post Request Using Postman
+ 
+<img width="670" alt="post-req" src="https://user-images.githubusercontent.com/29310552/151684896-256da998-b6aa-4037-bd2b-a0f7dcb10b2d.PNG">
+ 
+<img width="671" alt="get-pos" src="https://user-images.githubusercontent.com/29310552/151684903-eca0a919-6d79-47e5-9451-d952c72d5555.PNG">
+
+
+
+ 
+ 
+
+
  
 
 
