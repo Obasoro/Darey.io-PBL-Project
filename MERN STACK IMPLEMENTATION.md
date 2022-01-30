@@ -701,11 +701,171 @@ export default Todo;
  
 We need to make little adjustment to our react code. Delete the logo and adjust our App.js to look like this.
  
-
+`$ cd src`
  
+`$ vi App.js
+ 
+Delete the code and paste the followong
 
+```
+import React from 'react';
+
+import Todo from './components/Todo';
+import './App.css';
+
+const App = () => {
+return (
+<div className="App">
+<Todo />
+</div>
+);
+}
+
+export default App;
+ 
+```
+In the src directory open the App.css
+ 
+`$ vi App.css`
+ 
+ Paste this code below
  
  ```
+ 
+ .App {
+text-align: center;
+font-size: calc(10px + 2vmin);
+width: 60%;
+margin-left: auto;
+margin-right: auto;
+}
+
+input {
+height: 40px;
+width: 50%;
+border: none;
+border-bottom: 2px #101113 solid;
+background: none;
+font-size: 1.5rem;
+color: #787a80;
+}
+
+input:focus {
+outline: none;
+}
+
+button {
+width: 25%;
+height: 45px;
+border: none;
+margin-left: 10px;
+font-size: 25px;
+background: #101113;
+border-radius: 5px;
+color: #787a80;
+cursor: pointer;
+}
+
+button:focus {
+outline: none;
+}
+
+ul {
+list-style: none;
+text-align: left;
+padding: 15px;
+background: #171a1f;
+border-radius: 5px;
+}
+
+li {
+padding: 15px;
+font-size: 1.5rem;
+margin-bottom: 15px;
+background: #282c34;
+border-radius: 5px;
+overflow-wrap: break-word;
+cursor: pointer;
+}
+
+@media only screen and (min-width: 300px) {
+.App {
+width: 80%;
+}
+
+input {
+width: 100%
+}
+
+button {
+width: 100%;
+margin-top: 15px;
+margin-left: 0;
+}
+}
+
+@media only screen and (min-width: 640px) {
+.App {
+width: 60%;
+}
+
+input {
+width: 50%;
+}
+
+button {
+width: 30%;
+margin-left: 10px;
+margin-top: 0;
+}
+}
+ 
+```
+ 
+Open the Index.css and delete the code to the the following
+ 
+`$ vim Index.css`
+ 
+```
+body {
+margin: 0;
+padding: 0;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+sans-serif;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+box-sizing: border-box;
+background-color: #282c34;
+color: #787a80;
+}
+
+code {
+font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+monospace;
+}
+ 
+```
+ 
+Go to the Todo directory
+
+`$ cd ../..
+
+Run the follwing command within the Todo
+
+`$ npm run dev`
+
+![image](https://user-images.githubusercontent.com/29310552/151704159-3f870078-1ebc-4ef2-957c-b905f4672bd6.png)
+ 
+ 
+Credit:
+[Darey.io](https://www.darey.io/docs/simple-to-do-application-on-mern-web-stack/)
+
+
+ 
+
+ 
+
  
   
 
