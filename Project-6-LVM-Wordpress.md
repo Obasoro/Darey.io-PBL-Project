@@ -153,6 +153,27 @@ We would use the mkfs.ext4 to format the logical volumes with ext4 filesystem
 
 `$ sudo mkfs -t ext4 /dev/webdata-vg/logs-lv`
 
+<img width="569" alt="23-format" src="https://user-images.githubusercontent.com/29310552/154802069-6cc5491e-1ef3-4826-8021-9269d4757d17.PNG">
+
+Create /var/www/html directory to store website files
+
+Create /home/recovery/logs to store backup of log data
+
+Mount /var/www/html on apps-lv logical volume
+
+Use [rsync](https://linux.die.net/man/1/rsync) utility to backup all the files in the log directory /var/log into /home/recovery/logs
+
+<img width="728" alt="24-" src="https://user-images.githubusercontent.com/29310552/154802337-134af727-b8ff-49a8-8c5f-125fdf13275e.PNG">
+
+Mount /var/log on logs-lv logical volume. (Note that all the existing data on /var/log will be deleted. That is why step 15 above is very
+important)
+
+Restore log files back into /var/log directory
+
+Update /etc/fstab file so that the mount configuration will persist after restart of the server.
+
+
+
 
 
 
