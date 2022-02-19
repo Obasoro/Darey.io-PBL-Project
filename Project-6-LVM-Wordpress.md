@@ -172,6 +172,100 @@ Restore log files back into /var/log directory
 
 Update /etc/fstab file so that the mount configuration will persist after restart of the server.
 
+`$ sudo blkid`
+
+<img width="865" alt="25-" src="https://user-images.githubusercontent.com/29310552/154819500-c289f26a-f9fe-41f5-8ca6-d7c04bab59e8.PNG">
+
+UPDATE THE `/ETC/FSTAB` FILE
+
+The UUID of the device will be used to update the /etc/fstab file
+
+`$ sudo vi /etc/fstab`
+
+<img width="657" alt="26" src="https://user-images.githubusercontent.com/29310552/154820089-e44cbae9-c673-47ed-acf4-980c657f8610.PNG">
+
+Run the following command to Test the configuration and reload the daemon
+
+`$ sudo mount -a`
+`$ sudo systemctl daemon-reload`
+
+<img width="688" alt="27-" src="https://user-images.githubusercontent.com/29310552/154820171-f10e9cd6-4886-4414-8b15-cab9e0aa811f.PNG">
+
+# Step 2 — Prepare the Database Server
+In the first stage we prepared the webserver, now we would need to prepare the database server
+
+Create volumes and and attached the volume to database server
+
+<img width="760" alt="1" src="https://user-images.githubusercontent.com/29310552/154821641-070c6310-bb2a-4190-8936-d10ef3bbde06.PNG">
+
+Access the instance through SSH
+
+<img width="860" alt="2" src="https://user-images.githubusercontent.com/29310552/154822032-ab711797-7e9b-4255-a32d-36c63e430263.PNG">
+
+Check the added volumes in the instance
+
+<img width="350" alt="3" src="https://user-images.githubusercontent.com/29310552/154822045-18cd3d26-520d-47da-a137-2c65aef0dcfe.PNG">
+
+Create a Logical volume partitions within the disk using the gdisk
+
+`$ sudo gdisk /dev/xvdf`
+
+<img width="646" alt="4-" src="https://user-images.githubusercontent.com/29310552/154822077-085aaf23-d7d7-4bd8-8112-b7043259cbfe.PNG">
+
+`$ sudo gdisk /dev/xvdg`
+
+<img width="709" alt="5-xvdg" src="https://user-images.githubusercontent.com/29310552/154822086-a58310a4-3ab6-4375-b874-5d53a9434500.PNG">
+
+`$ sudo gdisk /dev/xvdh`
+<img width="725" alt="6-h" src="https://user-images.githubusercontent.com/29310552/154822089-2037c27c-ea58-4598-bf72-465679265cfa.PNG">
+
+To confirm logical volume, run this command
+`$ lsblk`
+
+<img width="401" alt="7-" src="https://user-images.githubusercontent.com/29310552/154822251-56af830c-66c7-4f3c-bfbc-be0d07e7af58.PNG">
+
+We now install logical volume using this command on Redhat distro
+
+`$ sudo yum install lvm2`
+
+<img width="858" alt="8-install lvm" src="https://user-images.githubusercontent.com/29310552/154822356-5205c2f0-8b7e-44b0-bd3f-217b73bc0640.PNG">
+
+
+To check the available partitions
+
+`$ sudo lvmdiskscan`
+
+<img width="421" alt="9-lvmdisk" src="https://user-images.githubusercontent.com/29310552/154822352-85dab90e-77ec-4078-8b87-1c5f6e93def6.PNG">
+
+Use [pvcreate](https://linux.die.net/man/8/pvcreate) utility to mark each of 3 disks as physical volumes (PVs) to be used by LVM
+
+`$ sudo pvcreate /dev/xvdf1`
+
+`$ sudo pvcreate /dev/xvdg1`
+
+`$ sudo pvcreate /dev/xvdh1`
+
+<img width="472" alt="10-physcal" src="https://user-images.githubusercontent.com/29310552/154822413-d4c7a879-0120-420b-9300-01578d6260ff.PNG">
+
+Verify that your Physical volume has been created successfully by running
+
+<img width="351" alt="11-pvs" src="https://user-images.githubusercontent.com/29310552/154822472-2287a32e-28d2-4ff3-988c-0ad10587daad.PNG">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
