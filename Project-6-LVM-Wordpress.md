@@ -217,6 +217,7 @@ Create a Logical volume partitions within the disk using the gdisk
 <img width="709" alt="5-xvdg" src="https://user-images.githubusercontent.com/29310552/154822086-a58310a4-3ab6-4375-b874-5d53a9434500.PNG">
 
 `$ sudo gdisk /dev/xvdh`
+
 <img width="725" alt="6-h" src="https://user-images.githubusercontent.com/29310552/154822089-2037c27c-ea58-4598-bf72-465679265cfa.PNG">
 
 To confirm logical volume, run this command
@@ -250,6 +251,196 @@ Use [pvcreate](https://linux.die.net/man/8/pvcreate) utility to mark each of 3 d
 Verify that your Physical volume has been created successfully by running
 
 <img width="351" alt="11-pvs" src="https://user-images.githubusercontent.com/29310552/154822472-2287a32e-28d2-4ff3-988c-0ad10587daad.PNG">
+
+Use [vgcreate](https://linux.die.net/man/8/vgcreate) utility to add all 3 PVs to a volume group (VG). Name the VG vg-database
+
+`$ sudo vgcreate vg-database /dev/xvdf1 /dev/xvdg1 /dev/xvdh1`
+
+`$ sudo vgs`
+
+<img width="702" alt="12-" src="https://user-images.githubusercontent.com/29310552/154822680-861eb8f3-bbb7-4701-b56b-4305ef10c1b6.PNG">
+
+To create
+
+`$ sudo lvcreate -n db-lv -L 25G vg-database`
+
+<img width="571" alt="13-vgs" src="https://user-images.githubusercontent.com/29310552/154823021-2cad9e81-d625-4e0f-8d34-c1e568cada08.PNG">
+
+Verify the entire setup
+
+`$ sudo vgdisplay -v #view complete setup - VG, PV, and LV`
+
+<img width="803" alt="14-dis" src="https://user-images.githubusercontent.com/29310552/154823096-fb124b7f-9865-41e0-839c-2a032138027e.PNG">
+
+
+`$ sudo lsblk`
+
+<img width="475" alt="15-lsb" src="https://user-images.githubusercontent.com/29310552/154823104-d6599b44-3ea2-4611-8ca0-8ee724c063e0.PNG">
+
+Use mkfs.ext4 to format the logical volumes with ext4 filesystem
+
+First create a directory for database
+
+`$ sudo mkdir /db
+
+`$ sudo mkfs.ext4 /dev/vg-database/dv-lv`
+
+<img width="639" alt="16-db" src="https://user-images.githubusercontent.com/29310552/154823360-f27d8e31-2efe-47f8-8c38-6db1020e96d8.PNG">
+
+`sudo mount /dev/vg-database/db-lv /db`
+
+<img width="928" alt="17-" src="https://user-images.githubusercontent.com/29310552/154823747-e02f2adc-14c0-43b6-8509-c3d5743626e7.PNG">
+
+Insert the UUID number and reload the system
+
+`$ sudo vi /etc/fstab
+
+<img width="681" alt="18-" src="https://user-images.githubusercontent.com/29310552/154823909-25d4e187-29c1-41c9-8e18-3e2927f8671c.PNG">
+
+`$ sudo mount -a
+
+`$ sudo systemctl reload`
+
+`$ df -h`
+
+<img width="489" alt="19" src="https://user-images.githubusercontent.com/29310552/154824001-2de874f1-27ab-46e3-aa7e-c86dc9aa9ba7.PNG">
+
+# Step 3 — Install WordPress on your Web Server EC2
+
+-Update the repository
+
+`$ sudo yum -y update`
+
+-Install wget, Apache and it’s dependencies
+[tecmint](https://www.tecmint.com/install-php-8-on-centos/) on how to install php on redhat
+
+`$ sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json`
+
+-#To install PHP and it’s depemdencies
+`$ sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm`
+`$ sudo yum install yum-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm`
+`$ sudo yum module list php`
+`$ sudo yum module reset php`
+`$ sudo yum module enable php:remi-7.4`
+`$ sudo yum install php php-opcache php-gd php-curl php-mysqlnd`
+`$ sudo systemctl start php-fpm`
+`$ sudo systemctl enable php-fpm`
+`$ setsebool -P httpd_execmem 1`
+
+<img width="831" alt="21-modul" src="https://user-images.githubusercontent.com/29310552/154824885-adaa0655-0ce8-49e7-9fcf-10c4975205d5.PNG">
+
+<img width="955" alt="22" src="https://user-images.githubusercontent.com/29310552/154824887-2d5d01eb-69da-424d-9936-2e0b50107498.PNG">
+
+
+-Start Apache
+`$ sudo systemctl enable httpd`
+`$ sudo systemctl start httpd`
+
+<img width="871" alt="23" src="https://user-images.githubusercontent.com/29310552/154824881-02ce7564-acfa-4ed6-8718-bfd6aca10177.PNG">
+
+
+`$ sudo systemctl restart httpd`
+
+To test if the apache is running
+
+<img width="848" alt="24-" src="https://user-images.githubusercontent.com/29310552/154825171-f7869eca-3775-409d-96cb-a9e096f4b056.PNG">
+
+- Download wordpress and copy wordpress to var/www/html
+
+`$ mkdir wordpress`
+`$ cd   wordpress`
+`$ sudo wget http://wordpress.org/latest.tar.gz`
+`$ sudo tar xzvf latest.tar.gz`
+`$ sudo rm -rf latest.tar.gz`
+`$ cp wordpress/wp-config-sample.php wordpress/wp-config.php`
+~$ cp -R wordpress /var/www/html/`
+
+<img width="902" alt="26-" src="https://user-images.githubusercontent.com/29310552/154825677-31b0aca2-716f-4bc0-b865-a709ac2e3b89.PNG">
+
+<img width="821" alt="27-" src="https://user-images.githubusercontent.com/29310552/154825678-e4d2fba7-a6c4-48f4-99b1-7d59257d20cf.PNG">
+
+<img width="735" alt="28-" src="https://user-images.githubusercontent.com/29310552/154825679-ab167a2b-b449-481a-9a9a-1e3b33eb7225.PNG">
+
+Also install `mysql` within the webserver. This would enble the wordpress store the data
+
+`$ sudo yum install mysql-server -y
+
+`$ sudo systemctl start mysqld`
+
+`$ sudo systemctl status mysqld`
+
+<img width="829" alt="29" src="https://user-images.githubusercontent.com/29310552/154825921-e9c090bd-6bb4-476e-80c3-ef8aa6baa5b4.PNG">
+
+Repeat the same process for the database server
+
+`$ sudo yum install mysql-server -y
+
+`$ sudo systemctl start mysqld`
+
+`$ sudo systemctl status mysqld`
+
+`$ sudo mysql_secure_installation`
+
+`$ sudo mysql -u root -p`
+
+<img width="692" alt="30-" src="https://user-images.githubusercontent.com/29310552/154826107-4cfcb121-f433-4a4c-90cd-d682569fb51f.PNG">
+
+
+<img width="734" alt="31" src="https://user-images.githubusercontent.com/29310552/154826110-8e2b831a-c57a-4eb0-9923-ef9d35f04129.PNG">
+
+
+Run this command and change the name of database to one you used, private IP address from EC2 and also password.
+
+`$ sudo vi wp-config-sample.php`
+
+This command is to disable the apache page
+
+`$ sudo mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf_backup`
+
+
+`$ sudo mysql -h 172.31.27.234 -u wordpress -p`
+
+<img width="959" alt="32" src="https://user-images.githubusercontent.com/29310552/154827196-fb93c9e7-11a7-48d5-bbc7-34c9bcced0c2.PNG">
+
+
+Configure SELinux Policies
+
+`$  sudo chown -R apache:apache /var/www/html/`
+
+<img width="740" alt="33-root-apache" src="https://user-images.githubusercontent.com/29310552/154827285-107261cd-8623-4cda-a9c6-9a69b4320f7d.PNG">
+
+`$ sudo chcon -t httpd_sys_rw_content_t /var/www/html/ -R`
+  
+`$ sudo setsebool -P httpd_can_network_connect=1`
+
+`$ sudo setsebool -P httpd_can_network_connect_db 1`
+
+Reload the webserver Instance
+
+<img width="909" alt="34" src="https://user-images.githubusercontent.com/29310552/154827711-f4a008b6-117d-4220-abea-57cd8df899fd.PNG">
+
+<img width="931" alt="35" src="https://user-images.githubusercontent.com/29310552/154827731-1be39a9a-a33e-4f43-9e2f-b478ea3ef939.PNG">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
