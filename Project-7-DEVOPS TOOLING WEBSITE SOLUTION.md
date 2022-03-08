@@ -34,6 +34,7 @@ Use the `lsblk` command to inspect the block devices attached to server
 
 <img width="485" alt="lbk" src="https://user-images.githubusercontent.com/29310552/157117600-4157695a-d815-490f-8221-fc2734e69c96.PNG">
 
+
 Let us create the Logical Volumes (LVM) on the attached volumes on the web-server
 
 `$ sudo gdisk /dev/xvdf`
@@ -240,6 +241,25 @@ Add this file below:
 
 ```
 
+
+Repeat the process 1-5 for remaining webservers
+
+<img width="496" alt="server 3" src="https://user-images.githubusercontent.com/29310552/157144404-70944bef-c435-446f-a4ca-df28ccab83b0.PNG">
+
+<img width="514" alt="server2" src="https://user-images.githubusercontent.com/29310552/157144407-1f9011fb-40eb-453b-b1e9-9efc34e24e80.PNG">
+
+Verify that Apache files and directories are available on the Web Server in /var/www and also on the NFS server in /mnt/apps.
+
+<img width="381" alt="test" src="https://user-images.githubusercontent.com/29310552/157148206-d91a3218-4d9f-4662-976b-eabcabbba899.PNG">
+
+<img width="520" alt="cpy-html" src="https://user-images.githubusercontent.com/29310552/157148711-bb508dec-ebee-4645-8754-a7d6e9ad5c78.PNG">
+
+
+6. Locate the log folder for Apache on the Web Server and mount it to NFS server’s export for logs. Repeat step №4 to make sure the mount point will persist after reboot.
+
+7. Fork the tooling source code from [Darey.io Github Account](https://github.com/darey-io/tooling.git) to your Github account.
+
+<img width="609" alt="fork-repo" src="https://user-images.githubusercontent.com/29310552/157148641-413276ba-3ba5-46eb-a390-7982b4fd7e2c.PNG">
 
 
 
