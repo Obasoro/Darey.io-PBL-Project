@@ -128,6 +128,124 @@ On the NFT-Server, run the following commands:
 
 `$ sudo systemctl status nfs-server.service`
 
+<img width="733" alt="18" src="https://user-images.githubusercontent.com/29310552/157131123-989b715a-486f-4429-89a3-1f8cd26cfba9.PNG">
+
+Export the mounts for webservers’ subnet cidr to connect as clients. For simplicity, you would install all three Web Servers inside the same subnet, but in production set up we would probably want to separate each tier inside its our subnet for higher level of security.
+To check our subnet cidr – open your EC2 details in AWS web console and locate ‘Networking’ tab and open a Subnet link:
+
+<img width="757" alt="web-1" src="https://user-images.githubusercontent.com/29310552/157135471-19da3116-13ef-438a-9364-e8cbbdad810e.PNG">
+
+we now set up permission that will allow our Web servers to read, write and execute files on NFS:
+
+`$ sudo chown -R nobody: /mnt/apps`
+`$ sudo chown -R nobody: /mnt/logs`
+`$ sudo chown -R nobody: /mnt/opt`
+
+`$ sudo chmod -R 777 /mnt/apps`
+`$ sudo chmod -R 777 /mnt/logs`
+`$ sudo chmod -R 777 /mnt/opt`
+
+`$ sudo systemctl restart nfs-server.service`
+
+<img width="613" alt="19" src="https://user-images.githubusercontent.com/29310552/157137429-b0348fbd-015a-4212-a255-1c889e6ac6c6.PNG">
+
+Run this command below
+
+`$ sudo vi /etc/exports`
+
+Paste this inside the text editor and save
+
+```
+/mnt/apps <Subnet-CIDR>(rw,sync,no_all_squash,no_root_squash)
+/mnt/logs <Subnet-CIDR>(rw,sync,no_all_squash,no_root_squash)
+/mnt/opt <Subnet-CIDR>(rw,sync,no_all_squash,no_root_squash)
+
+```
+<img width="439" alt="20" src="https://user-images.githubusercontent.com/29310552/157137675-b8f7082b-ac08-4a9e-8eef-69f416a2e25d.PNG">
+
+`$ sudo expoertfs -arv`
+
+`$rpcinfo -p | grep nfs
+
+<img width="436" alt="21" src="https://user-images.githubusercontent.com/29310552/157138376-e728fff9-012d-4436-a459-699c5b8974ee.PNG">
+
+
+Check which port is used by NFS and open it using Security Groups (add new Inbound Rule)
+
+<img width="694" alt="security-group" src="https://user-images.githubusercontent.com/29310552/157138507-897abb3c-919e-4cd9-b966-20747794ab4d.PNG">
+
+## Configure Databases Server
+
+By now you should know how to install and configure a MySQL DBMS to work with remote Web Server
+
+ - Install MySQL server
+ - Create a database and name it tooling
+ - Create a database user and name it webaccess
+ - Grant permission to webaccess user on tooling database to do anything only from the webservers subnet cidr
+
+<img width="734" alt="ubuntu-db" src="https://user-images.githubusercontent.com/29310552/157138848-9eb907fa-8fdb-4822-ac61-7b12a5eb81ec.PNG">
+
+<img width="569" alt="ubuntu-db1" src="https://user-images.githubusercontent.com/29310552/157139072-27195207-4a86-43dd-83f2-50c5dc4195ba.PNG">
+
+<img width="233" alt="ubuntu-db2" src="https://user-images.githubusercontent.com/29310552/157139073-486dfbc3-4cc2-4aae-95f7-bda1a31713d3.PNG">
+
+## Step 3 — Prepare the Web Servers
+
+During the next steps we will do following:
+
+- Configure NFS client (this step must be done on all three servers)
+- Deploy a Tooling application to our Web Servers into a shared NFS folder
+- Configure the Web Servers to work with a single MySQL database
+
+`$ sudo yum install nfs-utils nfs4-acl-tools -y`
+
+4. Verify that NFS was mounted successfully by running df -h. Make sure that the changes will persist on Web Server after reboot:
+
+`$ df -h
+
+<img width="548" alt="webserver1" src="https://user-images.githubusercontent.com/29310552/157140779-eeac05ad-9bd1-4b47-b9f6-5b02f1a092c3.PNG">
+
+`$ sudo vi /etc/fstab`
+
+Add this file below:
+
+```
+<NFS-Server-Private-IP-Address>:/mnt/apps /var/www nfs defaults 0 0
+
+```
+
+`$ sudo vi /etc/fstab`
+
+<img width="663" alt="webserver2" src="https://user-images.githubusercontent.com/29310552/157141687-e47cdd2a-4c04-4b75-b9c5-b604e1e385f9.PNG">
+
+5. Install Remi’s repository, Apache and PHP
+```
+`$ sudo yum install httpd -y`
+
+`$ sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm`
+
+`$ sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm`
+
+`$ sudo dnf module reset php`
+
+`$ sudo dnf module enable php:remi-7.4`
+
+`$ sudo dnf install php php-opcache php-gd php-curl php-mysqlnd`
+
+`$ sudo systemctl start php-fpm`
+
+`$ sudo systemctl enable php-fpm`
+
+`$ setsebool -P httpd_execmem 1`
+
+```
+
+
+
+
+
+
+
 
 
 
