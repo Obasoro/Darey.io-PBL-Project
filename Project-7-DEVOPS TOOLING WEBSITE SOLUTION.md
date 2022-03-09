@@ -255,11 +255,27 @@ Verify that Apache files and directories are available on the Web Server in /var
 <img width="520" alt="cpy-html" src="https://user-images.githubusercontent.com/29310552/157148711-bb508dec-ebee-4645-8754-a7d6e9ad5c78.PNG">
 
 
+
+
 6. Locate the log folder for Apache on the Web Server and mount it to NFS server’s export for logs. Repeat step №4 to make sure the mount point will persist after reboot.
+
+<img width="716" alt="apache-log" src="https://user-images.githubusercontent.com/29310552/157370431-6ebe2c2f-044f-45b2-9881-fa669fc5222f.PNG">
+
 
 7. Fork the tooling source code from [Darey.io Github Account](https://github.com/darey-io/tooling.git) to your Github account.
 
 <img width="609" alt="fork-repo" src="https://user-images.githubusercontent.com/29310552/157148641-413276ba-3ba5-46eb-a390-7982b4fd7e2c.PNG">
+
+A server reboot was carried when Apache server was starting up
+
+<img width="584" alt="syste" src="https://user-images.githubusercontent.com/29310552/157372613-efd2076e-491b-466a-8e87-5c3c4e5d5856.PNG">
+
+Opening the public-ip on the net
+
+Create a Database and Insert and login
+
+<img width="720" alt="end" src="https://user-images.githubusercontent.com/29310552/157379209-9acf1ced-8403-4bb6-8aa7-6279df3d502f.PNG">
+
 
 
 
