@@ -102,6 +102,11 @@ We are going to create the physical volume on the LVM. Run the following command
 
 `$ sudo pvcreate /dev/xvdg1`
 
+To remove or delete volume group run the following command
+
+`$ sudo vgreduce --removemissing VG`
+
+
 <img width="607" alt="15-phys-vol" src="https://user-images.githubusercontent.com/29310552/154801281-2e7c1f86-d7e5-4ee3-94d1-be3413cb109b.PNG">
 
 To confirm that our physical volumes have been successful we run
