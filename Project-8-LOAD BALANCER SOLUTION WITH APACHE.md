@@ -26,5 +26,37 @@ Run the command below to verify installation
 
 <img width="364" alt="3" src="https://user-images.githubusercontent.com/29310552/161868852-ad25e9ba-cbe4-41cc-9806-4793f82a7e4f.PNG">
 
+# CONFIGURE APACHE AS A LOAD BALANCER
+
+## Configure Apache As A Load Balancer
+
+1. Create an Ubuntu Server 20.04 EC2 instance and name it Project-8-apache-lb, so your EC2 list will look like this:
+
+<img width="728" alt="4" src="https://user-images.githubusercontent.com/29310552/161869830-883c5a8e-e1bf-4fc9-b5c2-09d3a31bc1ae.PNG">
+
+2. Open a security group and enable the port 80 for TCP
+
+3. Install Apache Load Balancer on the Load-Balancer server created and and configure it to point traffic coming to LB to both Web Servers.
+
+Run the following command to configure the load balancer
+
+```
+#Install apache2
+sudo apt update
+sudo apt install apache2 -y
+sudo apt-get install libxml2-dev
+
+#Enable following modules:
+sudo a2enmod rewrite
+sudo a2enmod proxy
+sudo a2enmod proxy_balancer
+sudo a2enmod proxy_http
+sudo a2enmod headers
+sudo a2enmod lbmethod_bytraffic
+
+#Restart apache2 service
+sudo systemctl restart apache2
+
+```
 
 
