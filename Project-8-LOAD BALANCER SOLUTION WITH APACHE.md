@@ -109,5 +109,14 @@ sudo vi /etc/hosts
 Re-run this command:
 
 `$ sudo vi /etc/apache2/sites-available/000-default.conf`
+  
+Remove the private IP's within the file and replace with web1, web2 and web3 respectively
+  
+Run curl http://web1, curl http://web2 and curl http://web3
+  
+<img width="632" alt="last" src="https://user-images.githubusercontent.com/29310552/161879734-11f4b76e-c2ce-4526-9b41-6032fd38135e.PNG">
+
+  
+This project was done using the following materials from [Darey.io](https://www.darey.io/docs/32951-2/)
 
 
