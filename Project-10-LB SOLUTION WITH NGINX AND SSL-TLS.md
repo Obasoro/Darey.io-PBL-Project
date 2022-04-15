@@ -125,6 +125,9 @@ With the command below we can check for certbot installation.
 
 We shall be able to access our website by using HTTPS protocol (that uses TCP port 443) and see a padlock pictogram in your browser’s search string.
 
+
+<img width="761" alt="gmic" src="https://user-images.githubusercontent.com/29310552/163511163-94b87ef0-fdf5-459d-afc3-87614a33fb35.PNG">
+
 Set up periodical renewal of your SSL/TLS certificate
 By default, LetsEncrypt certificate is valid for 90 days, so it is recommended to renew it at least every 60 days or more frequently.
 
@@ -137,7 +140,6 @@ You can test renewal command in dry-run mode
 The best practise is to schedule a the renewal date
 
 
-<img width="761" alt="gmic" src="https://user-images.githubusercontent.com/29310552/163511163-94b87ef0-fdf5-459d-afc3-87614a33fb35.PNG">
 
 `$ crontab -e`
 
