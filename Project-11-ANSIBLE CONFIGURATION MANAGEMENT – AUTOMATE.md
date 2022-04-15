@@ -84,6 +84,70 @@ Run this command
 Now your setup will look like this:
   
 ![image](https://user-images.githubusercontent.com/29310552/163635845-deb84dfd-cf76-47d2-8ba5-5b2be1209321.png)
+   
+
+   
+## Step 2 – Prepare your development environment using Visual Studio Code
+   
+First part of ‘DevOps’ is ‘Dev’, which means you will require to write some codes and you shall have proper tools that will make your coding and debugging comfortable – you need an Integrated development environment (IDE) or Source-code Editor. There is a plethora of different IDEs and Source-code Editors for different languages with their own advantages and drawbacks, you can choose whichever you are comfortable with, but we recommend one free and universal editor that will fully satisfy your needs.
+   
+VScode allow for proper development environment. You can downlaod [vscode](https://code.visualstudio.com/download).
+   
+Install several needed extension that would allow us to work conveniently on vscode
+   
+ - Remote development server
+ - git (enable git)
+ - create a folder and clone the git repository into it.
+   
+ <img width="674" alt="5" src="https://user-images.githubusercontent.com/29310552/163650421-c16432bf-2502-4b5b-b808-36e5e072a894.PNG">
+
+
+   
+# BEGIN ANSIBLE DEVELOPMENT
+   
+Check out the git status after cloning.
+   
+<img width="614" alt="1 o" src="https://user-images.githubusercontent.com/29310552/163651098-c2daa10d-2ce1-42e7-b88a-0ff305f1d41e.PNG">
+
+
+<img width="762" alt="5 10" src="https://user-images.githubusercontent.com/29310552/163650440-a65110dd-9044-4fdb-ae6b-6a10004744f8.PNG">
+   
+Checkout the newly created feature branch to your local machine and start building your code and directory structure
+   
+`$ git checkout -b <project-title>
+   
+<img width="604" alt="1 1" src="https://user-images.githubusercontent.com/29310552/163651302-3067551b-a455-4d3a-9f2c-7ce1b09c5f77.PNG">
+   
+
+Create a directory and name it playbooks – it will be used to store all your playbook files
+   
+`$ mkdir playbooks`
+   
+Create a directory and name it inventory – it will be used to keep your hosts organised.
+   
+`$ mkdir inventory`
+   
+Within the playbooks folder, create your first playbook, and name it common.yml
+   
+`$ cd playbooks`
+   
+`$ touch common.yml`
+   
+  
+Within the inventory folder, create an inventory file (.yml) for each environment (Development, Staging Testing and Production) dev, staging, uat, and prod respectively.
+   
+`$ cd inventory`
+   
+`$ touch dev.yml staging.yml uat.yml prod.yml
+   
+<img width="618" alt="1 3" src="https://user-images.githubusercontent.com/29310552/163651921-3030befa-ef40-45af-b365-da4154404719.PNG">
+   
+# Step 4 – Set up an Ansible Inventory
+   
+An Ansible inventory file defines the hosts and groups of hosts upon which commands, modules, and tasks in a playbook operate. Since our intention is to execute Linux commands on remote hosts, and ensure that it is the intended configuration on a particular server that occurs. It is important to have a way to organize our hosts in such an Inventory.
+
+
+
 
 
   
