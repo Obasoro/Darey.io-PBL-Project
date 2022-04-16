@@ -145,6 +145,17 @@ Within the inventory folder, create an inventory file (.yml) for each environmen
 # Step 4 – Set up an Ansible Inventory
    
 An Ansible inventory file defines the hosts and groups of hosts upon which commands, modules, and tasks in a playbook operate. Since our intention is to execute Linux commands on remote hosts, and ensure that it is the intended configuration on a particular server that occurs. It is important to have a way to organize our hosts in such an Inventory.
+   
+<bold>Note</bold>: Ansible uses TCP port 22 by default, which means it needs to ssh into target servers from Jenkins-Ansible host – for this you can implement the concept of ssh-agent. Now you need to import your key into ssh-agent.
+   
+To learn how to setup SSH agent and connect VS Code to your Jenkins-Ansible instance, please see this video:
+   
+  - For Windows users – [ssh-agent on windows](https://youtu.be/OplGrY74qog)
+  - For Linux users – [ssh-agent on linux](https://youtu.be/OplGrY74qog)
+   
+ 
+   
+ 
 
 
 
