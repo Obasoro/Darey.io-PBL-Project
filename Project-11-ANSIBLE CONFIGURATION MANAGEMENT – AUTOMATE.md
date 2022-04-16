@@ -236,7 +236,49 @@ Examine the code above and try to make sense out of it. This playbook is divided
 Step 6 – Update GIT with the latest code
 
 
+In the real world, you will be working within a team of other DevOps engineers and developers. It is important to learn how to collaborate with help of GIT. In many organisations there is a development rule that do not allow to deploy any code before it has been reviewed by an extra pair of eyes – it is also called "Four eyes principle".
 
+Now you have a separate branch, you will need to know how to raise a Pull Request (PR), get your branch peer reviewed and merged to the master branch.
+
+Commit your code into GitHub:
+
+use git commands to add, commit and push your branch to GitHub.
+   
+```
+git status
+
+git add <selected files>
+
+git commit -m "commit message"
+   
+```
+   
+Create a Pull request (PR)
+
+Wear a hat of another developer for a second, and act as a reviewer.
+
+If the reviewer is happy with your new feature development, merge the code to the master branch.
+
+Head back on your terminal, checkout from the feature branch into the master, and pull down the latest changes.
+ 
+<img width="872" alt="jenkins update" src="https://user-images.githubusercontent.com/29310552/163659430-4a32b628-befd-4915-bb97-3f3e34c490eb.PNG">
+   
+check the number of jobs as a result of built and archives
+   
+`$ sudo ls  /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive`
+
+![image](https://user-images.githubusercontent.com/29310552/163659499-2c53ca63-019d-4916-bb7a-fd746de332e8.png)
+   
+# RUN FIRST ANSIBLE TEST
+   
+## Step 7 – Run first Ansible test
+   
+Now, it is time to execute ansible-playbook command and verify if your playbook actually works:
+   
+`$ cd ansible-config-mgt`
+   
+`$ ansible-playbook -i inventory/dev.yml playbooks/common.yml`
+   
 
   
 
