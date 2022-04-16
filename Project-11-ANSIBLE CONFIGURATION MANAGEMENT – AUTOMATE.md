@@ -279,6 +279,9 @@ Now, it is time to execute ansible-playbook command and verify if your playbook 
    
 `$ ansible-playbook -i inventory/dev.yml playbooks/common.yml`
    
+ ![image](https://user-images.githubusercontent.com/29310552/163664933-e7005c4d-8c48-430c-83d5-fc60e0b1cb31.png)
+
+   
 
   
 
