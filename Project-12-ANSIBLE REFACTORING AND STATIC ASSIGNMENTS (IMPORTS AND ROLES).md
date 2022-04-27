@@ -63,6 +63,71 @@ Let see code re-use in action by importing other playbooks.
 
 - Inside site.yml file, import common.yml playbook.
 
+```
+---
+- hosts: all
+- import_playbook: ../static-assignments/common.yml
+
+```
+
+The code above uses built in import_playbook Ansible module.
+
+Your folder structure should look like this;
+
+```
+
+├── static-assignments
+│   └── common.yml
+├── inventory
+    └── dev
+    └── stage
+    └── uat
+    └── prod
+└── playbooks
+    └── site.yml
+    
+```
+
+- Run ansible-playbook command against the dev environment
+
+Since we have already done this in Projec 11, we can go ahead and update the ```common.yml``` to ```common-del.yml```
+
+```
+
+---
+- name: update web, nfs and db servers
+  hosts: webservers, nfs, db
+  remote_user: ec2-user
+  become: yes
+  become_user: root
+  tasks:
+  - name: delete wireshark
+    yum:
+      name: wireshark
+      state: removed
+
+- name: update LB server
+  hosts: lb
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  tasks:
+  - name: delete wireshark
+    apt:
+      name: wireshark-qt
+      state: absent
+      autoremove: yes
+      purge: yes
+      autoclean: yes
+      
+ ```
+ 
+ update site.yml with - import_playbook: ../static-assignments/common-del.yml instead of common.yml and run it against dev servers
+ 
+ Access the parent workind directory of the inventory folder
+ 
+ `$ /home/ubuntu/ansible-config-mgt/inventory`, copy and go into the configuration file of ansible
+
 
 
 
