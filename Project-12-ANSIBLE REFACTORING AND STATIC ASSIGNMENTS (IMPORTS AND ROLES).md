@@ -65,8 +65,11 @@ Let see code re-use in action by importing other playbooks.
 
 ```
 ---
-- hosts: all
-- import_playbook: ../static-assignments/common.yml
+--- 
+- 
+  hosts: all
+- 
+  import_playbook: ../static-assignments/common.yml
 
 ```
 
@@ -127,6 +130,11 @@ Since we have already done this in Projec 11, we can go ahead and update the ```
  Access the parent workind directory of the inventory folder
  
  `$ /home/ubuntu/ansible-config-mgt/inventory`, copy and go into the configuration file of ansible
+ 
+<img width="630" alt="delete" src="https://user-images.githubusercontent.com/29310552/165660081-5e35780b-2818-43ec-8dcf-db2d009403c3.PNG">
+
+Now you have learned how to use import_playbooks module and you have a ready solution to install/delete packages on multiple servers with just one command.
+
 
 
 
