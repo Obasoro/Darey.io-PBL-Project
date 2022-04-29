@@ -159,7 +159,7 @@ ansible-galaxy init webserver
 
 - Create the directory/files structure manually
 
-<strong>Note:</> You can choose either way, but since you store all your codes in GitHub, it is recommended to create folders and files there rather than locally on Jenkins-Ansible server.
+<strong>Note</strong>: You can choose either way, but since you store all your codes in GitHub, it is recommended to create folders and files there rather than locally on Jenkins-Ansible server.
 
 
 
