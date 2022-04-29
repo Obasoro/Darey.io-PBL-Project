@@ -161,7 +161,55 @@ ansible-galaxy init webserver
 
 <strong>Note</strong>: You can choose either way, but since you store all your codes in GitHub, it is recommended to create folders and files there rather than locally on Jenkins-Ansible server.
 
+The entire folder structure should look like below, but if you create it manually – you can skip creating tests, files, and vars or remove them if you used ansible-galaxy
 
+```
+
+── webserver
+    ├── README.md
+    ├── defaults
+    │   └── main.yml
+    ├── files
+    ├── handlers
+    │   └── main.yml
+    ├── meta
+    │   └── main.yml
+    ├── tasks
+    │   └── main.yml
+    ├── templates
+    ├── tests
+    │   ├── inventory
+    │   └── test.yml
+    └── vars
+        └── main.yml
+        
+ ```
+ 
+After removing unnecessary directories and files, the roles structure should look like this
+
+```
+└── webserver
+    ├── README.md
+    ├── defaults
+    │   └── main.yml
+    ├── handlers
+    │   └── main.yml
+    ├── meta
+    │   └── main.yml
+    ├── tasks
+    │   └── main.yml
+    └── templates
+```
+
+<strong>Note</strong>: Ensure you are using ssh-agent to ssh into the Jenkins-Ansible instance just as it was done in project 11.
+
+```
+[uat-webservers]
+<Web1-UAT-Server-Private-IP-Address> ansible_ssh_user='ec2-user' 
+
+<Web2-UAT-Server-Private-IP-Address> ansible_ssh_user='ec2-user' 
+
+```
 
 
 
