@@ -223,8 +223,8 @@ After removing unnecessary directories and files, the roles structure should loo
   
   Your main.yml may consist of following tasks:
   
-  ```
-  ---
+```
+---
 - name: install apache
   become: true
   ansible.builtin.yum:
