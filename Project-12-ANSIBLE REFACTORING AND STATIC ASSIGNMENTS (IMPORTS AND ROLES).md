@@ -305,7 +305,7 @@ sudo ansible-playbook -i /home/ubuntu/ansible-config-mgt/inventory/uat.yml /home
   
 We should be able to see both of your UAT Web servers configured and you can try to reach them from your browser:
 
-http://<Web1 or Web2-UAT-Server-Public-IP-or-Public-DNS-Name>/index.php
+http://Web1 or Web2-UAT-Server-Public-IP-or-Public-DNS-Name/index.php
   
 <img width="945" alt="last" src="https://user-images.githubusercontent.com/29310552/166331620-cab0f69f-83d5-4b2a-bd83-11934d64bb4c.PNG">
 
