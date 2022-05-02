@@ -309,6 +309,8 @@ http://Web1 or Web2-UAT-Server-Public-IP-or-Public-DNS-Name/index.php
   
 <img width="945" alt="last" src="https://user-images.githubusercontent.com/29310552/166331620-cab0f69f-83d5-4b2a-bd83-11934d64bb4c.PNG">
 
+![image](https://user-images.githubusercontent.com/29310552/166332838-3a95151c-b3fe-4334-b840-917eab448b15.png)
+
 
   
   
