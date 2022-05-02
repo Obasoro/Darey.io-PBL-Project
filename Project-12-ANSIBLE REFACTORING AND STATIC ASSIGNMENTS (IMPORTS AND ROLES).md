@@ -17,6 +17,9 @@ Open vscode IDE and connect to the bastion host
 
 1.- Go to your Jenkins-Ansible server and create a new directory called ansible-config-artifact – we will store there all artifacts after each build
 
+![image](https://user-images.githubusercontent.com/29310552/166331484-8488e23a-c902-48fc-925b-a9fa44442447.png)
+
+
 `$ sudo mkdir /home/ubuntu/ansible-config-artifact`
 
 2.- Change permissions to this directory, so Jenkins could save files there –
@@ -291,6 +294,21 @@ So, we should have this in site.yml
   
 ```
   
+## Step 5 – Commit & Test
+  
+Commit your changes, create a Pull Request and merge them to master branch, make sure webhook triggered two consequent Jenkins jobs, they ran successfully and copied all the files to your Jenkins-Ansible server into /home/ubuntu/ansible-config-mgt/ directory
+  
+```
+sudo ansible-playbook -i /home/ubuntu/ansible-config-mgt/inventory/uat.yml /home/ubuntu/ansible-config-mgt/playbooks/site.yaml
+```
+<img width="737" alt="vs" src="https://user-images.githubusercontent.com/29310552/166331187-c8d08615-fe3e-4492-899b-683fae629db2.PNG">
+  
+We should be able to see both of your UAT Web servers configured and you can try to reach them from your browser:
+
+http://<Web1 or Web2-UAT-Server-Public-IP-or-Public-DNS-Name>/index.php
+  
+<img width="945" alt="last" src="https://user-images.githubusercontent.com/29310552/166331620-cab0f69f-83d5-4b2a-bd83-11934d64bb4c.PNG">
+
 
   
   
