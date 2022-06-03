@@ -22,7 +22,7 @@ In your GitHub account create a new repository and name it ansible-config-mgt.
 <img width="681" alt="2" src="https://user-images.githubusercontent.com/29310552/163630138-8cf0ef0a-09aa-4acd-919a-830e035527c3.PNG">
 
 
-Instal Ansible: In installing Ansible run the following command in your terminal:
+Install Ansible: In installing Ansible run the following command in your terminal:
 
 `$ sudo apt update`
 
@@ -77,7 +77,7 @@ Test the setup by making some change in README.MD file in master branch and make
   
 Run this command
   
-`$ sudo ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/`
+`$ sudo ls /var/lib/jenkins/jobs/<ansible(name of the github)>/builds/<build_number>/archive/`
   
 <img width="588" alt="4 2" src="https://user-images.githubusercontent.com/29310552/163635763-64f52042-2cfb-4684-8244-77357dee38e2.PNG">
   
