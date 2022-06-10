@@ -9,3 +9,5 @@ In this project we will introduce dynamic assignments by using ***include module
 Now you may be wondering, what is the difference between static and dynamic assignments?
 
 Well, from Project 12, you can already tell that static assignments use import Ansible module. The module that enables dynamic assignments is include.
+
+ansible-galaxy install -p ./roles <role-name>
