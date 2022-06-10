@@ -27,7 +27,99 @@ For this reason, we will now create a folder to keep each environment’s variab
 
 Your layout should now look like this.
   
+```
+├── dynamic-assignments
+│   └── env-vars.yml
+├── env-vars
+    └── dev.yml
+    └── stage.yml
+    └── uat.yml
+    └── prod.yml
+├── inventory
+    └── dev
+    └── stage
+    └── uat
+    └── prod
+├── playbooks
+    └── site.yml
+└── static-assignments
+    └── common.yml
+    └── webservers.yml
+```
+  
+Now paste the instruction below into the env-vars.yml file.
+  
 <img width="730" alt="1" src="https://user-images.githubusercontent.com/29310552/173123310-be8d37a0-8f37-46ce-8207-a379904e96d2.PNG">
+  
+  
+```
+---
+- name: collate variables from env specific file, if it exists
+  hosts: all
+  tasks:
+    - name: looping through list of available files
+      include_vars: "{{ item }}"
+      with_first_found:
+        - files:
+            - dev.yml
+            - stage.yml
+            - prod.yml
+            - uat.yml
+          paths:
+            - "{{ playbook_dir }}/../env-vars"
+      tags:
+        - always
+ ```
+ Notice 3 things to notice here:
 
+We used include_vars syntax instead of include, this is because Ansible developers decided to separate different features of the module. From Ansible version 2.8, the include module is deprecated and variants of include_* must be used. These are:
+- include_role
+- include_tasks
+- include_vars
+  
+In the same version, variants of import were also introduces, such as:
+import_role
+import_tasks
+  
+We made use of a special variables { playbook_dir } and { inventory_file }. { playbook_dir } will help Ansible to determine the location of the running playbook, and from there navigate to other path on the filesystem. { inventory_file } on the other hand will dynamically resolve to the name of the inventory file being used, then append .yml so that it picks up the required file within the env-vars folder.
+We are including the variables using a loop. with_first_found implies that, looping through the list of files, the first one found is used. This is good so that we can always set default values in case an environment specific env file does not exist.
+  
+# UPDATE SITE.YML WITH DYNAMIC ASSIGNMENTS
+  
+## Update site.yml with dynamic assignments
 
-ansible-galaxy install -p ./roles <role-name>
+We Update site.yml file to make use of the dynamic assignment. 
+
+site.yml should now look like this.
+  
+```
+---
+- hosts: all
+- name: Include dynamic variables 
+  tasks:
+  import_playbook: ../static-assignments/common.yml 
+  include: ../dynamic-assignments/env-vars.yml
+  tags:
+    - always
+
+-  hosts: webservers
+- name: Webserver assignment
+  import_playbook: ../static-assignments/webservers.yml
+```
+  
+  
+## Community Roles
+  
+Now it is time to create a role for MySQL database – it should install the MySQL package, create a database and configure users
+  
+Download Mysql Ansible Role
+  
+You can download [Geerlingguy.mysql]<https://galaxy.ansible.com/geerlingguy/mysql>
+  
+  <strong>Hint</strong>: To preserve your your GitHub in actual state after you install a new role – make a commit and push to master your ‘ansible-config-mgt’ directory. Of course you must have git installed and configured on Jenkins-Ansible server and, for more convenient work with codes, you can configure Visual Studio Code to work with this directory. In this case, you will no longer need webhook and Jenkins jobs to update your codes on Jenkins-Ansible server, so you can disable it – we will be using Jenkins later for a better purpose.
+  
+
+Inside roles directory create your new MySQL role with `ansible-galaxy install -p ./roles geerlingguy.mysql`
+  
+<img width="671" alt="4" src="https://user-images.githubusercontent.com/29310552/173129429-9f699c19-ff43-45b4-8a64-a560b238d063.PNG">
+
