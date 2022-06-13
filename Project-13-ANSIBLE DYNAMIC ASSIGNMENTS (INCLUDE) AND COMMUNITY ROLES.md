@@ -122,4 +122,57 @@ You can download [Geerlingguy.mysql]<https://galaxy.ansible.com/geerlingguy/mysq
 Inside roles directory create your new MySQL role with `ansible-galaxy install -p ./roles geerlingguy.mysql`
   
 <img width="671" alt="4" src="https://user-images.githubusercontent.com/29310552/173129429-9f699c19-ff43-45b4-8a64-a560b238d063.PNG">
+  
+Inside roles directory create your new MySQL role with ansible-galaxy install geerlingguy.mysql and rename the folder to mysql
+  
+`$ mv geerlingguy.mysql/ mysql`
+  
+<img width="525" alt="5" src="https://user-images.githubusercontent.com/29310552/173462102-b0eed573-a0cc-4244-8681-147b3c3f5346.PNG">
+  
+Read README.md file, and edit roles configuration to use correct credentials for MySQL required for the tooling website.
+  
+```
+git status
+git add .
+git commit -m "Commit new role files into GitHub"
+git push --set-upstream origin dynamic-assignment
+  
+```
+
+```
+git checkout main
+  
+git merge dynmaic-assignments
+  
+```
+These command are to merge the main and branch together.
+  
+![image](https://user-images.githubusercontent.com/29310552/173464388-b7b43cc9-50c7-4cf7-a656-67f62dbfe0cc.png)
+  
+# LOAD BALANCER ROLES
+  
+## Load Balancer roles
+We want to be able to choose which Load Balancer to use, Nginx or Apache, so we need to have two roles respectively:
+
+### Nginx
+
+`ansible-galaxy install -p ./roles geerlingguy.nginx`
+  
+`mv geerlingguy.nginx/ nginx`
+ 
+![image](https://user-images.githubusercontent.com/29310552/173465248-415923cc-c298-4717-afd0-b90f49f35ab8.png)
+  
+### Apache
+  
+`ansible-galaxy install -p ./roles geerlingguy.apache`
+  
+`mv geerlingguy.apache/ apache`
+  
+![image](https://user-images.githubusercontent.com/29310552/173465796-aa7ea5df-fc7b-4a5a-b949-526628665abc.png)
+
+  
+
+  
+
+
 
