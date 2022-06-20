@@ -186,9 +186,30 @@ loadbalancers.yml
   roles:
     - { role: nginx, when: enable_nginx_lb and load_balancer_is_required }
     - { role: apache, when: enable_apache_lb and load_balancer_is_required }
+ 
  ```
 
+
   
+site.yml file
+  
+```
+- name: Loadbalancers assignment
+        hosts: lb
+        - import_playbook: ../static-assignments/loadbalancers.yml
+        when: load_balancer_is_required 
+```
+  
+![image](https://user-images.githubusercontent.com/29310552/174583446-df61e24a-dfba-4d7c-8741-36a22645b9b7.png)
+  
+Now you can make use of env-vars\uat.yml file to define which loadbalancer to use in UAT environment by setting respective environmental variable to true.
+
+You will activate load balancer, and enable nginx by setting these in the respective environment’s env-vars file.
+
+![image](https://user-images.githubusercontent.com/29310552/174584867-f7ac0d00-395a-44ef-bf2d-8c0a45a1d2b7.png)
+  
+
+
 
   
 
