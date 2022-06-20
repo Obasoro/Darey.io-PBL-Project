@@ -169,6 +169,24 @@ We want to be able to choose which Load Balancer to use, Nginx or Apache, so we 
 `mv geerlingguy.apache/ apache`
   
 ![image](https://user-images.githubusercontent.com/29310552/173465796-aa7ea5df-fc7b-4a5a-b949-526628665abc.png)
+  
+Since you cannot use both Nginx and Apache load balancer, you need to add a condition to enable either one – this is where you can make use of variables.
+
+Declare a variable in defaults/main.yml file inside the Nginx and Apache roles. Name each variables enable_nginx_lb and enable_apache_lb respectively.
+
+Set both values to false like this enable_nginx_lb: false and enable_apache_lb: false.
+
+Declare another variable in both roles load_balancer_is_required and set its value to false as well
+
+Update both assignment and site.yml files respectively
+  
+loadbalancers.yml
+```
+- hosts: lb
+  roles:
+    - { role: nginx, when: enable_nginx_lb and load_balancer_is_required }
+    - { role: apache, when: enable_apache_lb and load_balancer_is_required }
+ ```
 
   
 
