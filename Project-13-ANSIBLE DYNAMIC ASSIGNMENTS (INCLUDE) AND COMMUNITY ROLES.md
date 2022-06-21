@@ -208,6 +208,13 @@ You will activate load balancer, and enable nginx by setting these in the respec
 
 ![image](https://user-images.githubusercontent.com/29310552/174584867-f7ac0d00-395a-44ef-bf2d-8c0a45a1d2b7.png)
   
+Run this command on the ansivle-config-class
+  
+`$ ansible-playbook -i inventory/uat.yml playbooks/site.yml`
+  
+<img width="733" alt="9" src="https://user-images.githubusercontent.com/29310552/174692424-9e75986c-7735-43cd-84e7-e5a92b94e1f5.PNG">
+
+  
 
 
 
