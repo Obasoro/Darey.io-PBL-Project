@@ -74,6 +74,37 @@ pentest-tooling
 <Pentest-for-Tooling-Private-IP-Address>
 ```
 
+# ANSIBLE ROLES FOR CI ENVIRONMENT
+
+Now go ahead and Add two more roles to ansible:
+
+- <strong>SonarQube</strong>
+- <strong>Artifactory</strong>
+
+### Configuring Ansible For Jenkins Deployment
+
+![image](https://user-images.githubusercontent.com/29310552/175798413-628698ef-0fb7-44a1-830d-6557212468d8.png)
+
+In the previous projects we used the command line interface (CLI), but in this project we would be running Ansible from Jenkin GUI. To achieve this
+
+Navigate to Jenkins URL
+
+Install & Open Blue Ocean Jenkins Plugin
+
+Create a new pipeline
+
+Click on manage jenkins button on the lefthand panel, click available and search for update, you can also check for clobal security within jenkins configuration to tick 
+
+![image](https://user-images.githubusercontent.com/29310552/175799347-33ebc9fd-c660-4e60-9eaa-b91778603905.png)
+
+
+![image](https://user-images.githubusercontent.com/29310552/175799294-2255c323-304a-49c5-832c-49e8ee5bce58.png)
+
+![image](https://user-images.githubusercontent.com/29310552/175799423-64f42a83-2278-4d56-825f-6fb9fca91e0c.png)
+
+
+
+
 
 
 
