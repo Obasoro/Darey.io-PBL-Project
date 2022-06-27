@@ -115,6 +115,24 @@ Inside the Ansible project, create a new directory deploy and start a new file J
 
 ![image](https://user-images.githubusercontent.com/29310552/175964863-8e05fe34-8f4c-4b47-839e-40367150b0d5.png)
 
+```
+pipeline {
+    agent any
+
+  stages {
+    stage('Build') {
+      steps {
+        script {
+          sh 'echo "Building Stage"'
+        }
+      }
+    }
+    }
+}
+
+```
+
+![image](https://user-images.githubusercontent.com/29310552/175991256-5cfa2231-921b-4762-9a84-678a90f565b7.png)
 
 
 
