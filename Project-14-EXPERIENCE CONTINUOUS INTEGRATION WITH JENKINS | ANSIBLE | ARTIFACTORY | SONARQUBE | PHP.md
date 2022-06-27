@@ -102,6 +102,22 @@ Click on manage jenkins button on the lefthand panel, click available and search
 
 ![image](https://user-images.githubusercontent.com/29310552/175799423-64f42a83-2278-4d56-825f-6fb9fca91e0c.png)
 
+- Navigate to Jenkins URL
+- Create a new pipeline
+- Select GitHub
+- Connect Jenkins with GitHub
+- Login to GitHub & Generate an Access Token
+- Copy Access Token
+- Paste the token and connect
+- Create a new Pipeline
+# Let us create our Jenkinsfile
+Inside the Ansible project, create a new directory deploy and start a new file Jenkinsfile inside the directory.
+
+![image](https://user-images.githubusercontent.com/29310552/175964863-8e05fe34-8f4c-4b47-839e-40367150b0d5.png)
+
+
+
+
 
 
 
