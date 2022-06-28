@@ -169,6 +169,24 @@ pipeline {
 
 ![image](https://user-images.githubusercontent.com/29310552/176061926-0a824d5a-039d-417e-b4ea-770e1f3a71ba.png)
 
+# Building the Pipeline
+```
+1. Create a pull request to merge the latest code into the main branch
+2. After merging the PR, go back into your terminal and switch into the main branch.
+3. Pull the latest change.
+4. Create a new branch, add more stages into the Jenkins file to simulate below phases. (Just add an echo command like we have in build and test stages)
+   1. Package 
+   2. Deploy 
+   3. Clean up
+5. Verify in Blue Ocean that all the stages are working, then merge your feature branch to the main branch
+6. Eventually, your main branch should have a successful pipeline like this in blue ocean
+```
+
+
+
+![image](https://user-images.githubusercontent.com/29310552/176170664-6911d4cb-44a5-459b-b2f3-8f1990869756.png)
+
+
 
 
 
