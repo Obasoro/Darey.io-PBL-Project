@@ -186,6 +186,8 @@ pipeline {
 
 ![image](https://user-images.githubusercontent.com/29310552/176170664-6911d4cb-44a5-459b-b2f3-8f1990869756.png)
 
+# RUNNING ANSIBLE PLAYBOOK FROM JENKINS
+
 
 
 
