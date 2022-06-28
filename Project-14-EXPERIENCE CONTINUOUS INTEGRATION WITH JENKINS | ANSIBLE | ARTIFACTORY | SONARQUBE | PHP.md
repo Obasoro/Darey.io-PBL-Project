@@ -131,8 +131,40 @@ pipeline {
 }
 
 ```
+![image](https://user-images.githubusercontent.com/29310552/176061140-9881f704-5890-460f-94c0-d5d9c0cb3f86.png)
 
-![image](https://user-images.githubusercontent.com/29310552/175991256-5cfa2231-921b-4762-9a84-678a90f565b7.png)
+![image](https://user-images.githubusercontent.com/29310552/176061229-e5a75dde-1fde-45f8-aa79-2ceabf41f23c.png)
+
+Let us see this in action.
+
+- Create a new git branch and name it feature/jenkinspipeline-stages
+Currently we only have the Build stage. Let us add another stage called Test. 
+
+```
+pipeline {
+    agent any
+
+  stages {
+    stage('Build') {
+      steps {
+        script {
+          sh 'echo "Building Stage"'
+        }
+      }
+    }
+
+    stage('Test') {
+      steps {
+        script {
+          sh 'echo "Testing Stage"'
+        }
+      }
+    }
+    }
+}
+
+```
+
 
 
 
