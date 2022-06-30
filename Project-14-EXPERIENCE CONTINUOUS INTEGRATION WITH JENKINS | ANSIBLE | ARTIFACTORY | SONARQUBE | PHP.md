@@ -188,6 +188,35 @@ pipeline {
 
 # RUNNING ANSIBLE PLAYBOOK FROM JENKINS
 
+Installing Ansible on Jenkins
+Installing Ansible plugin in Jenkins UI
+Creating Jenkinsfile from scratch. (Delete all you currently have in there and start all over to get Ansible to run successfully)
+
+We would install Ansible on the Jenkins UI
+![image](https://user-images.githubusercontent.com/29310552/176323517-6847b04d-82a3-4825-aa10-9a18a4035572.png)
+
+# Steps
+
+- Goto Jenkins UI
+- click Global tools configuration
+- Look for Ansible and click. For the name put ansible, and for path /usr/bin/ (This can be gotten using "which ansible" on the terminal of the server
+- Goto Credential on the Jenkin server.
+- click add new credential. 
+![image](https://user-images.githubusercontent.com/29310552/176587653-a3639fe0-8a40-4932-9551-6282467915e2.png)
+- Copy and paste the private-key of server. If it ubuntu, redhat(ec2-user) or other linux distros, input the right name.
+- Go back to dashboard, click pipeline syntax.
+![image](https://user-images.githubusercontent.com/29310552/176588072-bf052479-2a23-450b-8b2f-b3b328844b5b.png)
+
+![image](https://user-images.githubusercontent.com/29310552/176588675-3d27471b-b29b-433b-96af-090aba579726.png)
+
+- Fill in the necessary option and click generate script
+
+![image](https://user-images.githubusercontent.com/29310552/176588781-8235dc48-fd96-447c-8166-de4da99a1ad4.png)
+
+
+
+
+
 
 
 
