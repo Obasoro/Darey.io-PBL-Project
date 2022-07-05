@@ -213,6 +213,40 @@ We would install Ansible on the Jenkins UI
 
 ![image](https://user-images.githubusercontent.com/29310552/176588781-8235dc48-fd96-447c-8166-de4da99a1ad4.png)
 
+![image](https://user-images.githubusercontent.com/29310552/177306928-2f260770-f925-46e0-8219-3a58a0d34ca1.png)
+
+# Parameterizing Jenkinsfile For Ansible Deployment
+
+1- Update sit inventory with new servers
+```
+[tooling]
+<SIT-Tooling-Web-Server-Private-IP-Address>
+
+[todo]
+<SIT-Todo-Web-Server-Private-IP-Address>
+
+[nginx]
+<SIT-Nginx-Private-IP-Address>
+
+[db:vars]
+ansible_user=ec2-user
+ansible_python_interpreter=/usr/bin/python
+
+[db]
+<SIT-DB-Server-Private-IP-Address>
+```
+
+2 - Update Jenkinsfile to introduce parameterization
+```
+pipeline {
+    agent any
+
+    parameters {
+      string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
+    }
+...
+```
+
 
 
 
