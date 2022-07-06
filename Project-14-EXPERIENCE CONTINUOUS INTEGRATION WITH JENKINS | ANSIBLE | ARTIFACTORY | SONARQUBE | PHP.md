@@ -270,6 +270,17 @@ We already have tooling website as a part of deployment through Ansible. Here we
 
 ![image](https://user-images.githubusercontent.com/29310552/177446309-ad1899ee-3556-4ac8-9794-f9a106409155.png)
 
+![image](https://user-images.githubusercontent.com/29310552/177564322-829d362b-2b5c-4400-aa56-ae32a694bc7f.png)
+
+copy the ip of the artifactory server (http://ip:8082). username: admin and password:password
+
+![image](https://user-images.githubusercontent.com/29310552/177566422-23410f5a-c46d-493f-b9f0-e68f04fd167c.png)
+
+![image](https://user-images.githubusercontent.com/29310552/177570265-30100964-a069-4038-99b4-41a72a0df7f9.png)
+
+
+
+
 
 
 
