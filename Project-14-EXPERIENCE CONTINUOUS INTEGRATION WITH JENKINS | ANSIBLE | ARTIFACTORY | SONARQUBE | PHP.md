@@ -248,6 +248,29 @@ pipeline {
 ```
 ![image](https://user-images.githubusercontent.com/29310552/177436748-9772dc6b-18f4-47c4-bc75-d4dd6865ba7f.png)
 
+![image](https://user-images.githubusercontent.com/29310552/177447712-45ad7891-0c4a-4475-b087-aa5671e80a22.png)
+
+
+# CI/CD PIPELINE FOR TODO APPLICATION
+
+We already have tooling website as a part of deployment through Ansible. Here we will introduce another PHP application to add to the list of software products we are managing in our infrastructure. The good thing with this particular application is that it has unit tests, and it is an ideal application to show an end-to-end CI/CD pipeline for a particular application.
+
+## Phase 1 – Prepare Jenkins
+
+- Fork the repository below into your GitHub account and clone into the Jenkins-ansible server
+`https://github.com/darey-devops/php-todo.git`
+- On you Jenkins server, install PHP, its dependencies and Composer tool (Feel free to do this manually at first, then update your Ansible accordingly later)
+`sudo apt install -y zip libapache2-mod-php phploc php-{xml,bcmath,bz2,intl,gd,mbstring,mysql,zip}`
+- Install Jenkins plugins
+   - Plot plugin
+   - Artifactory plugin
+
+    We will use plot plugin to display tests reports, and code coverage information.
+    The Artifactory plugin will be used to easily upload code artifacts into an Artifactory server.
+
+![image](https://user-images.githubusercontent.com/29310552/177446309-ad1899ee-3556-4ac8-9794-f9a106409155.png)
+
+
 
 
 
