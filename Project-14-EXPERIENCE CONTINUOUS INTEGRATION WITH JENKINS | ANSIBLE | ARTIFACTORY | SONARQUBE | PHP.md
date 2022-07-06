@@ -246,6 +246,8 @@ pipeline {
     }
 ...
 ```
+![image](https://user-images.githubusercontent.com/29310552/177436748-9772dc6b-18f4-47c4-bc75-d4dd6865ba7f.png)
+
 
 
 
