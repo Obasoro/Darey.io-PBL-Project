@@ -285,6 +285,7 @@ copy the ip of the artifactory server (http://ip:8082). username: admin and pass
 - On the database server, create database and user
 - The ip address should be IP of the Jenkins server
 
+
 ```
 Create database homestead;
 CREATE USER 'homestead'@'%' IDENTIFIED BY 'sePret^i';
@@ -292,6 +293,56 @@ GRANT ALL PRIVILEGES ON * . * TO 'homestead'@'%';
 ```
 
 ![image](https://user-images.githubusercontent.com/29310552/177686081-09bac854-6205-473f-9081-7baabaf58a1a.png)
+
+- Update the database connectivity requirements in the file .env.sample
+- Update Jenkinsfile with proper pipeline configuration
+
+```
+pipeline {
+    agent any
+
+  stages {
+
+     stage("Initial cleanup") {
+          steps {
+            dir("${WORKSPACE}") {
+              deleteDir()
+            }
+          }
+        }
+
+    stage('Checkout SCM') {
+      steps {
+            git branch: 'main', url: 'https://github.com/obasoro/php-todo.git'
+      }
+    }
+
+    stage('Prepare Dependencies') {
+      steps {
+             sh 'mv .env.sample .env'
+             sh 'composer install'
+             sh 'php artisan migrate'
+             sh 'php artisan db:seed'
+             sh 'php artisan key:generate'
+      }
+    }
+  }
+}
+
+```
+Notice the Prepare Dependencies section
+
+The required file by PHP is .env so we are renaming .env.sample to .env
+Composer is used by PHP to install all the dependent libraries used by the application
+php artisan uses the .env file to setup the required database objects – (After successful run of this step, login to the database, run show tables and you will see the tables being created for you)
+Install mysql
+
+```
+sudo apt install mysql-client
+
+sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
+```
+change the bin address to 0.0.0.0
 
 
 
