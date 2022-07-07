@@ -340,9 +340,17 @@ Install mysql
 ```
 sudo apt install mysql-client
 
+Log into database server!!!
+
 sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
 ```
 change the bin address to 0.0.0.0
+
+DB_CONNECTION=mysql
+DB_PORT=3306
+DB_HOST=private-ip-database-server
+
+
 
 
 
