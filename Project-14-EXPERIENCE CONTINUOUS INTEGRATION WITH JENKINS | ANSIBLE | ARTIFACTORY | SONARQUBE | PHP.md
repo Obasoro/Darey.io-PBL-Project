@@ -278,6 +278,21 @@ copy the ip of the artifactory server (http://ip:8082). username: admin and pass
 
 ![image](https://user-images.githubusercontent.com/29310552/177570265-30100964-a069-4038-99b4-41a72a0df7f9.png)
 
+# Phase 2 – Integrate Artifactory repository with Jenkins
+
+- Create a dummy Jenkinsfile in the repository
+- Using Blue Ocean, create a multibranch Jenkins pipeline
+- On the database server, create database and user
+- The ip address should be IP of the Jenkins server
+
+```
+Create database homestead;
+CREATE USER 'homestead'@'%' IDENTIFIED BY 'sePret^i';
+GRANT ALL PRIVILEGES ON * . * TO 'homestead'@'%';
+```
+
+
+
 
 
 
