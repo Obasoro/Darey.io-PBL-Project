@@ -291,6 +291,11 @@ CREATE USER 'homestead'@'%' IDENTIFIED BY 'sePret^i';
 GRANT ALL PRIVILEGES ON * . * TO 'homestead'@'%';
 ```
 
+![image](https://user-images.githubusercontent.com/29310552/177686081-09bac854-6205-473f-9081-7baabaf58a1a.png)
+
+
+
+
 
 
 
