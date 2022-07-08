@@ -251,6 +251,8 @@ pipeline {
 ![image](https://user-images.githubusercontent.com/29310552/177447712-45ad7891-0c4a-4475-b087-aa5671e80a22.png)
 
 
+
+
 # CI/CD PIPELINE FOR TODO APPLICATION
 
 We already have tooling website as a part of deployment through Ansible. Here we will introduce another PHP application to add to the list of software products we are managing in our infrastructure. The good thing with this particular application is that it has unit tests, and it is an ideal application to show an end-to-end CI/CD pipeline for a particular application.
@@ -349,6 +351,43 @@ change the bin address to 0.0.0.0
 DB_CONNECTION=mysql
 DB_PORT=3306
 DB_HOST=private-ip-database-server
+
+
+![image](https://user-images.githubusercontent.com/29310552/178030553-652187f0-0df6-4122-bca1-312a0b315951.png)
+
+Notice the Prepare Dependencies section
+
+The required file by PHP is .env so we are renaming .env.sample to .env
+Composer is used by PHP to install all the dependent libraries used by the application
+php artisan uses the .env file to setup the required database objects – (After successful run of this step, login to the database, run show tables and you will see the tables being created for you)
+
+- Update the Jenkinsfile to include Unit tests step
+```
+stage('Execute Unit Tests') {
+      steps {
+             sh './vendor/bin/phpunit'
+      } 
+```
+## Phase 3 – Code Quality Analysis
+
+This is one of the areas where developers, architects and many stakeholders are mostly interested in as far as product development is concerned. As a DevOps engineer, you also have a role to play. Especially when it comes to setting up the tools.
+
+For PHP the most commonly tool used for code quality analysis is phploc
+
+The data produced by phploc can be ploted onto graphs in Jenkins.
+
+- Add the code analysis step in Jenkinsfile. The output of the data will be saved in build/logs/phploc.csv file
+```
+stage('Code Analysis') {
+  steps {
+        sh 'phploc app/ --log-csv build/logs/phploc.csv'
+
+  }
+}
+```
+
+
+
 
 
 
