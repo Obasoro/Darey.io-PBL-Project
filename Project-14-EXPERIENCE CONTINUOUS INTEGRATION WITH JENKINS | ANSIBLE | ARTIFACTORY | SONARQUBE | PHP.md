@@ -478,6 +478,28 @@ stage ('Deploy to Dev Environment') {
 ```
 ![image](https://user-images.githubusercontent.com/29310552/178085604-26b37076-7f9f-4f4d-b30e-f45ff20ca40b.png)
 
+![image](https://user-images.githubusercontent.com/29310552/178085946-be60e2cf-0cd8-4b87-9a46-0c3a343c1b7c.png)
+
+![image](https://user-images.githubusercontent.com/29310552/178088665-c7e65ea1-242a-488a-bc53-a764d4a8ac96.png)
+
+![image](https://user-images.githubusercontent.com/29310552/178088675-4b720b43-7d3c-441c-a755-9f710e74741a.png)
+
+# SONARQUBE INSTALLATION
+Before we start getting hands on with SonarQube configuration, it is incredibly important to understand a few concepts
+
+SonarQube is a tool that can be used to create quality gates for software projects, and the ultimate goal is to be able to ship only quality software code.
+
+Despite that DevOps CI/CD pipeline helps with fast software delivery, it is of the same importance to ensure the quality of such delivery. Hence, we will need SonarQube to set up Quality gates. In this project we will use predefined Quality Gates (also known as The Sonar Way). Software testers and developers would normally work with project leads and architects to create custom quality gates.
+
+```
+sudo sysctl -w vm.max_map_count=262144
+sudo sysctl -w fs.file-max=65536
+ulimit -n 65536
+ulimit -u 4096
+```
+
+
+
 
 
 
