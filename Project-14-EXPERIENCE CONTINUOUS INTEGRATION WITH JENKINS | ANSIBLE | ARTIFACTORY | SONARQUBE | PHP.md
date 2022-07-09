@@ -468,6 +468,18 @@ stage ('Upload Artifact to Artifactory') {
 
 ![image](https://user-images.githubusercontent.com/29310552/178084336-a53492e6-0c76-4cb5-918a-cdef0b86deb5.png)
 
+- Deploy the application to the dev environment by launching Ansible pipeline
+```
+stage ('Deploy to Dev Environment') {
+    steps {
+    build job: 'ansible-project/main', parameters: [[$class: 'StringParameterValue', name: 'env', value: 'dev']], propagate: false, wait: true
+    }
+  }
+```
+![image](https://user-images.githubusercontent.com/29310552/178085604-26b37076-7f9f-4f4d-b30e-f45ff20ca40b.png)
+
+
+
 
 
 
