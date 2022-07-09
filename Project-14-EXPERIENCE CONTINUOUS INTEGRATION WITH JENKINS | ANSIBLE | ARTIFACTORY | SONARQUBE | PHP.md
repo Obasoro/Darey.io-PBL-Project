@@ -485,7 +485,9 @@ stage ('Deploy to Dev Environment') {
 ![image](https://user-images.githubusercontent.com/29310552/178088675-4b720b43-7d3c-441c-a755-9f710e74741a.png)
 
 # SONARQUBE INSTALLATION
-Before we start getting hands on with SonarQube configuration, it is incredibly important to understand a few concepts
+Before we start getting hands on with SonarQube configuration, it is incredibly important to understand a few concepts.
+
+Requirement for Sonarqube is 4G RAM
 
 SonarQube is a tool that can be used to create quality gates for software projects, and the ultimate goal is to be able to ship only quality software code.
 
@@ -505,6 +507,32 @@ If your experiencing error in connection with sonarqube
 Update your `ansible.cfg` file  with `roles_path = /home/ubuntu/Project-14/ansible-config-mgt-class/roles`
 
 On your terminal connect `export ANSIBLE_CONFIG=/home/ubuntu/Project-14/ansible-config-mgt-class/deploy/ansible.cfg`
+
+```
+http://server_IP:9000 OR http://localhost:9000
+
+```
+
+![image](https://user-images.githubusercontent.com/29310552/178120156-7e91c39c-946c-45a7-93a9-09fb2d0043bf.png)
+
+On the Jenkisn UI, got to managed jenkins and install SonarQube Scanner
+
+![image](https://user-images.githubusercontent.com/29310552/178120358-133c3906-283d-4398-a819-57de2732f49b.png)
+
+![image](https://user-images.githubusercontent.com/29310552/178120899-bd59253c-4806-46ef-af4b-6b084a0c0b28.png)
+
+Go to the login page of sonarqube , generate a new password
+
+Go to adminstration on sonarqube UI, click webhook and paste `http://{JENKINS_HOST}/sonarqube-webhook/`
+
+![image](https://user-images.githubusercontent.com/29310552/178121102-6a09ad85-fde0-4dec-a328-5119e8bb8c20.png)
+
+![image](https://user-images.githubusercontent.com/29310552/178121401-9918a7ac-e4d2-4487-bd04-f6ef34b73b49.png)
+
+- Setup SonarQube scanner from Jenkins – Global Tool Configuration
+
+
+
 
 
 
