@@ -498,6 +498,16 @@ ulimit -n 65536
 ulimit -u 4096
 ```
 
+To make a permanent change, edit the file /etc/security/limits.conf and append the below
+
+If your experiencing error in connection with sonarqube
+
+Update your `ansible.cfg` file  with `roles_path = /home/ubuntu/Project-14/ansible-config-mgt-class/roles`
+
+On your terminal connect `export ANSIBLE_CONFIG=/home/ubuntu/Project-14/ansible-config-mgt-class/deploy/ansible.cfg`
+
+
+
 
 
 
