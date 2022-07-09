@@ -426,6 +426,50 @@ stage('Plot Code Coverage Report') {
 ```
 ![image](https://user-images.githubusercontent.com/29310552/178067248-fba78169-95cf-427a-bbdc-e1c167216319.png)
 
+![image](https://user-images.githubusercontent.com/29310552/178068338-9b2ae7ad-7973-40f5-be53-00837b4a5a32.png)
+
+- Bundle the application code for into an artifact (archived package) upload to Artifactory
+
+```
+stage ('Package Artifact') {
+    steps {
+            sh 'zip -qr php-todo.zip ${WORKSPACE}/*'
+     }
+    }
+ ```
+ 
+Install zip, if it is not installed `$ sudo apt install zip`
+
+- Publish the resulted artifact into Artifactory
+
+```
+stage ('Upload Artifact to Artifactory') {
+          steps {
+            script { 
+                 def server = Artifactory.server 'artifactory-server'                 
+                 def uploadSpec = """{
+                    "files": [
+                      {
+                       "pattern": "php-todo.zip",
+                       "target": "<name-of-artifact-repository>/php-todo",
+                       "props": "type=zip;status=ready"
+
+                       }
+                    ]
+                 }""" 
+
+                 server.upload spec: uploadSpec
+               }
+            }
+
+        }
+```
+![image](https://user-images.githubusercontent.com/29310552/178083407-bf005d48-3c86-44f2-9e82-abbabc38503d.png)
+
+![image](https://user-images.githubusercontent.com/29310552/178084336-a53492e6-0c76-4cb5-918a-cdef0b86deb5.png)
+
+
+
 
 
 
