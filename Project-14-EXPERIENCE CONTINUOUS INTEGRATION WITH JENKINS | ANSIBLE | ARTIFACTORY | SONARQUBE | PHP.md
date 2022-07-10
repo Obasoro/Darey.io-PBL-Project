@@ -523,7 +523,7 @@ On the Jenkisn UI, got to managed jenkins and install SonarQube Scanner
 
 Go to the login page of sonarqube , generate a new password
 
-Go to adminstration on sonarqube UI, click webhook and paste `http://{JENKINS_HOST}/sonarqube-webhook/`
+Go to adminstration on sonarqube UI, click webhook and paste `http://{JENKINS_HOST}/sonarqube-webhook/` ```http://http://ip-jenkins/sonar/sonarqube-webhook/```
 
 ![image](https://user-images.githubusercontent.com/29310552/178121102-6a09ad85-fde0-4dec-a328-5119e8bb8c20.png)
 
@@ -583,7 +583,31 @@ sonar.php.tests.reportPath=build/logs/junit.xml
 
 ![image](https://user-images.githubusercontent.com/29310552/178124228-6206ccd1-ce21-4f75-9f58-44c91eb0f741.png)
 
-![image](https://user-images.githubusercontent.com/29310552/178126522-b9c6ea24-3577-4852-a6a8-65a15e2483e5.png)
+![image](https://user-images.githubusercontent.com/29310552/178126986-174ee705-d2c9-44b6-b1ec-c4f4b361d4a0.png)
+
+## Complete the following tasks to finish Project 14
+
+Create and instance and name it Jenkins-slave
+
+#### Installing  JAVA
+====================================
+- sudo yum install java-11-openjdk-devel -y
+
+##### open the bash profile 
+vi .bash_profile 
+
+##### paste the below in the bash profile
+export JAVA_HOME=$(dirname $(dirname $(readlink $(readlink $(which javac)))))
+export PATH=$PATH:$JAVA_HOME/bin
+export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar
+
+On the Jenkins UI, go to Manage Jenkins and server for manage node
+
+![image](https://user-images.githubusercontent.com/29310552/178127469-ee9261fc-619d-4db9-84b3-40a0a9ce0f98.png)
+
+
+
+
 
 
 
