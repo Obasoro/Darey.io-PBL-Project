@@ -531,7 +531,59 @@ Go to adminstration on sonarqube UI, click webhook and paste `http://{JENKINS_HO
 
 - Setup SonarQube scanner from Jenkins – Global Tool Configuration
 
+![image](https://user-images.githubusercontent.com/29310552/178121714-2ef4d3d7-2121-495f-b901-9a1699867158.png)
 
+Add below to jenkinsfile in the `php-todo`
+
+```
+stage('SonarQube Quality Gate') {
+        environment {
+            scannerHome = tool 'SonarQubeScanner'
+        }
+        steps {
+            withSonarQubeEnv('sonarqube') {
+                sh "${scannerHome}/bin/sonar-scanner"
+            }
+
+        }
+    }
+ ```
+ 
+ <strong>Note</strong>: This above step will fail
+ 
+ - Configure sonar-scanner.properties – From the step above, Jenkins will install the scanner tool on the Linux server. You will need to go into the tools directory on the server to configure the properties file in which SonarQube will require to function during pipeline execution.
+
+`cd /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQubeScanner/conf/`
+
+![image](https://user-images.githubusercontent.com/29310552/178122818-47476ac3-d220-407c-b48f-3fde98d6b02f.png)
+
+Open the sonar-scanner.properties file
+
+`sudo vi sonar-scanner.properties`
+```
+sonar.host.url=http://IP-Sonarqube:9000/sonar/
+sonar.projectKey=php-todo
+#----- Default source code encoding
+sonar.sourceEncoding=UTF-8
+sonar.php.exclusions=**/vendor/**
+sonar.php.coverage.reportPaths=build/logs/clover.xml
+sonar.php.tests.reportPath=build/logs/junit.xml
+```
+![image](https://user-images.githubusercontent.com/29310552/178123351-f6d8d3dc-1def-48fa-8c84-018c105e2fc6.png)
+
+![image](https://user-images.githubusercontent.com/29310552/178123433-d78d5d44-df46-4f78-8ea6-5105f48b9c1f.png)
+
+`cd /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQubeScanner/bin`
+
+![image](https://user-images.githubusercontent.com/29310552/178124103-58efe3e4-3b09-4d84-b70a-0e41418dda0c.png)
+
+![image](https://user-images.githubusercontent.com/29310552/178124173-f8bb9565-7c30-4a7d-9130-f042ca9f9a84.png)
+
+- Navigate to php-todo project in SonarQube
+
+![image](https://user-images.githubusercontent.com/29310552/178124228-6206ccd1-ce21-4f75-9f58-44c91eb0f741.png)
+
+![image](https://user-images.githubusercontent.com/29310552/178126522-b9c6ea24-3577-4852-a6a8-65a15e2483e5.png)
 
 
 
