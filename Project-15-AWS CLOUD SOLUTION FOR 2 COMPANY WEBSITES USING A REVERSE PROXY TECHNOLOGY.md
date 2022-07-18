@@ -91,7 +91,23 @@ Create RDS
 ![image](https://user-images.githubusercontent.com/29310552/179501669-153a549b-94ec-4f0e-b022-cd7c838f3235.png)
  
 ## Set Up Compute Resources for Nginx
+1. Create an EC2 Instance based on CentOS Amazon Machine Image (AMI) in any 2 Availability Zones (AZ) in any AWS Region (it is recommended to use the Region that is    closest to your customers). Use EC2 instance of T2 family (e.g. t2.micro or similar)
+2. Ensure that it has the following software installed:
 
+    - python
+    - ntp
+    - net-tools
+    - vim
+    - wget
+    - telnet
+    - epel-release
+    - htop
+
+![image](https://user-images.githubusercontent.com/29310552/179506422-5f6c8485-dab0-4b09-a48d-f6aa0401bd86.png)
+ 
+In creating ami and install necessary modules [ami] (https://github.com/obasoro/ACS-project-config/blob/main/Installation.md)
+
+![image](https://user-images.githubusercontent.com/29310552/179515419-2b69854f-c09a-46fb-a118-a27f5082ca85.png)
 
 
 
