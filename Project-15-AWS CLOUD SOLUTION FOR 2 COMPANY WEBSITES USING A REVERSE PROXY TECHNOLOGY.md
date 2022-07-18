@@ -43,7 +43,28 @@ As part of the company’s desire for improved security and performance, a decis
 ![image](https://user-images.githubusercontent.com/29310552/179435205-cc8a5570-d767-4f5f-888c-70bbd3993bb0.png)
 
 [9] Create a Security Group for:
+- Nginx Servers: Access to Nginx should only be allowed from a Application Load balancer (ALB). At this point, we have not created a load balancer, therefore we       will update the rules later. For now, just create it and put some dummy records as a place holder.
+ 
  ![image](https://user-images.githubusercontent.com/29310552/179436112-9450ef92-a651-43e9-8f89-f80fbe834318.png)
+ 
+- Bastion Servers: Access to the Bastion servers should be allowed only from workstations that need to SSH into the bastion servers. Hence, you can use your           workstation public IP address. To get this information, simply go to your terminal and type curl www.canhazip.com
+![image](https://user-images.githubusercontent.com/29310552/179436644-cb3b6b0a-0736-4445-bd04-32267335869c.png)
+ 
+- Application Load Balancer: ALB will be available from the Internet
+ 
+![image](https://user-images.githubusercontent.com/29310552/179437478-339d6fad-996b-4478-ada0-af30bd74fe3a.png)
+ 
+![image](https://user-images.githubusercontent.com/29310552/179438053-ce4e0d60-e83f-402e-a794-7c4b7dd1fe08.png)
+
+ 
+- Webservers: Access to Webservers should only be allowed from the Nginx servers. Since we do not have the servers created yet, just put some dummy records as a       place holder, we will update it later.
+![image](https://user-images.githubusercontent.com/29310552/179438667-0b50a5b3-8860-403f-b504-bed7b3cdc637.png)
+
+- Data Layer: Access to the Data layer, which is comprised of Amazon Relational Database Service (RDS) and Amazon Elastic File System (EFS) must be carefully         desinged – only webservers should be able to connect to RDS, while Nginx and Webservers will have access to EFS Mountpoint.
+ 
+![image](https://user-images.githubusercontent.com/29310552/179439442-4e1a625f-9578-4241-8d46-771208408671.png)
+
+
 
 
 
