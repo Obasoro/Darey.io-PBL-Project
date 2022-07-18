@@ -63,6 +63,39 @@ As part of the company’s desire for improved security and performance, a decis
 - Data Layer: Access to the Data layer, which is comprised of Amazon Relational Database Service (RDS) and Amazon Elastic File System (EFS) must be carefully         desinged – only webservers should be able to connect to RDS, while Nginx and Webservers will have access to EFS Mountpoint.
  
 ![image](https://user-images.githubusercontent.com/29310552/179439442-4e1a625f-9578-4241-8d46-771208408671.png)
+ 
+ 
+# Creating Computing Resources
+ 
+![image](https://user-images.githubusercontent.com/29310552/179490426-a6776c86-9115-4078-9303-d2993b2a5d3a.png) 
+ 
+ Below is the file <strong>EFS</strong> 
+ 
+![image](https://user-images.githubusercontent.com/29310552/179493477-aa06efba-e39c-4fac-8f66-53e28efb8d0f.png)
+
+Access point 
+![image](https://user-images.githubusercontent.com/29310552/179494163-ba8118c8-8b40-4758-94af-83356ff2cd6e.png)
+ 
+![image](https://user-images.githubusercontent.com/29310552/179494856-3d035a6e-a713-4ee0-9a75-2553b6452dc0.png)
+
+Create a Key Management service account which generate a key
+
+![image](https://user-images.githubusercontent.com/29310552/179496134-4741ac6c-6347-4b0b-bc3a-d7f65c007550.png)
+ 
+Create a subnet group with all the availabilty and subnet group
+
+![image](https://user-images.githubusercontent.com/29310552/179500175-a6c86118-e890-4ce0-acdf-8bbb742d40cf.png)
+
+Create RDS
+
+![image](https://user-images.githubusercontent.com/29310552/179501669-153a549b-94ec-4f0e-b022-cd7c838f3235.png)
+ 
+## Set Up Compute Resources for Nginx
+
+
+
+
+
 
 
 
