@@ -108,6 +108,18 @@ Create RDS
 In creating ami and install necessary modules [ami] (https://github.com/obasoro/ACS-project-config/blob/main/Installation.md)
 
 ![image](https://user-images.githubusercontent.com/29310552/179515419-2b69854f-c09a-46fb-a118-a27f5082ca85.png)
+ 
+Create Application Load Balance template
+![image](https://user-images.githubusercontent.com/29310552/179637786-2d0841c1-a773-446a-b2e5-d8d5ddaa63c4.png)
+ 
+Create an Auto-scaling group
+ 
+
+Accesing the RDS from the Bastion sever
+
+![image](https://user-images.githubusercontent.com/29310552/179651876-48106ded-ab42-4845-ad82-64cf1a7e338c.png)
+
+
 
 
 
