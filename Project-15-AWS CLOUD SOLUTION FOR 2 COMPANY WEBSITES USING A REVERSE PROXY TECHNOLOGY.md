@@ -110,7 +110,39 @@ In creating ami and install necessary modules [ami] (https://github.com/obasoro/
 ![image](https://user-images.githubusercontent.com/29310552/179515419-2b69854f-c09a-46fb-a118-a27f5082ca85.png)
  
 Create Application Load Balance template
+ 
+Nginx EC2 Instances will have configurations that accepts incoming traffic only from Load Balancers. No request should go directly to Nginx servers. With this kind of setup, we will benefit from intelligent routing of requests from the ALB to Nginx servers across the 2 Availability Zones. We will also be able to offload SSL/TLS certificates on the ALB instead of Nginx. Therefore, Nginx will be able to perform faster since it will not require extra compute resources to valifate certificates for every request.
+
+Create an Internet facing ALB
+Ensure that it listens on HTTPS protocol (TCP port 443)
+Ensure the ALB is created within the appropriate VPC | AZ | Subnets
+Choose the Certificate from ACM
+Select Security Group
+Select Nginx Instances as the target group
 ![image](https://user-images.githubusercontent.com/29310552/179637786-2d0841c1-a773-446a-b2e5-d8d5ddaa63c4.png)
+ 
+## Application Load Balancer To Route Traffic To Web Servers
+Since the webservers are configured for auto-scaling, there is going to be a problem if servers get dynamically scalled out or in. Nginx will not know about the new IP addresses, or the ones that get removed. Hence, Nginx will not know where to direct the traffic.
+
+To solve this problem, we must use a load balancer. But this time, it will be an internal load balancer. Not Internet facing since the webservers are within a private subnet, and we do not want direct access to them.
+
+Create an Internal ALB
+Ensure that it listens on HTTPS protocol (TCP port 443)
+Ensure the ALB is created within the appropriate VPC | AZ | Subnets
+Choose the Certificate from ACM
+Select Security Group
+Select webserver Instances as the target group
+Ensure that health check passes for the target group
+ 
+## Setup EFS
+Amazon Elastic File System (Amazon EFS) provides a simple, scalable, fully managed elastic Network File System (NFS) for use with AWS Cloud services and on-premises resources. In this project, we will utulize EFS service and mount filesystems on both Nginx and Webservers to store data.
+
+Create an EFS filesystem
+Create an EFS mount target per AZ in the VPC, associate it with both subnets dedicated for data layer
+Associate the Security groups created earlier for data layer.
+Create an EFS access point. (Give it a name and leave all other settings as default)
+Setup RDS
+Pre-requisite: Create a KMS key from Key Management Service (KMS) to be used to encrypt the database instance.
  
 Create an Auto-scaling group
  
@@ -118,6 +150,20 @@ Create an Auto-scaling group
 Accesing the RDS from the Bastion sever
 
 ![image](https://user-images.githubusercontent.com/29310552/179651876-48106ded-ab42-4845-ad82-64cf1a7e338c.png)
+ 
+Using your tooling app
+ 
+![image](https://user-images.githubusercontent.com/29310552/179732955-5b9ca880-06b3-448e-a908-770f98b4b661.png)
+ 
+Health of the target group
+![image](https://user-images.githubusercontent.com/29310552/179733225-2a2d6d4c-fa7f-4a13-89b3-4877e03805e3.png)
+
+![image](https://user-images.githubusercontent.com/29310552/179733298-6cf49172-1c32-4962-b131-370f6b6a6da4.png)
+
+![image](https://user-images.githubusercontent.com/29310552/179733370-2e44a1e4-c948-461a-b143-d31b525f54a7.png)
+
+ 
+
 
 
 
