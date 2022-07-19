@@ -156,7 +156,6 @@ Using your tooling app
 ![image](https://user-images.githubusercontent.com/29310552/179732955-5b9ca880-06b3-448e-a908-770f98b4b661.png)
  
 Health of the target group
-![image](https://user-images.githubusercontent.com/29310552/179733225-2a2d6d4c-fa7f-4a13-89b3-4877e03805e3.png)
 
 ![image](https://user-images.githubusercontent.com/29310552/179733298-6cf49172-1c32-4962-b131-370f6b6a6da4.png)
 
