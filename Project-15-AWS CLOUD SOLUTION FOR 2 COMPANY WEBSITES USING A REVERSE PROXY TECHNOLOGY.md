@@ -156,10 +156,15 @@ Using your tooling app
 ![image](https://user-images.githubusercontent.com/29310552/179732955-5b9ca880-06b3-448e-a908-770f98b4b661.png)
  
 Health of the target group
+ 
+![image](https://user-images.githubusercontent.com/29310552/179905567-58a7191f-0efe-4568-9cf0-8afbf8f4c547.png)
 
 ![image](https://user-images.githubusercontent.com/29310552/179733298-6cf49172-1c32-4962-b131-370f6b6a6da4.png)
 
 ![image](https://user-images.githubusercontent.com/29310552/179733370-2e44a1e4-c948-461a-b143-d31b525f54a7.png)
+ 
+![image](https://user-images.githubusercontent.com/29310552/179905490-b615952d-ecb5-419f-8cf6-819e312b34c2.png)
+
  
  
 [darey.io](https://www.darey.io/docs/aws-cloud-solution-for-2-company-websites-using-a-reverse-proxy-technology/)
