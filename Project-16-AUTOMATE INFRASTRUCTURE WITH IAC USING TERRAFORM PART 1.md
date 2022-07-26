@@ -69,6 +69,69 @@ resource "aws_vpc" "main" {
 ![image](https://user-images.githubusercontent.com/29310552/180894622-97354b10-97dd-4a4e-9a7e-3a1e3f68bfea.png)
 
 
+## FIXING THE PROBLEMS BY CODE REFACTORING
+
+### Fixing The Problems By Code Refactoring
+
+Fixing Hard Coded Values: We will introduce variables, and remove hard coding.
+
+```
+variable "region" {
+        default = "eu-central-1"
+    }
+
+    variable "vpc_cidr" {
+        default = "172.16.0.0/16"
+    }
+
+    variable "enable_dns_support" {
+        default = "true"
+    }
+
+    variable "enable_dns_hostnames" {
+        default ="true" 
+    }
+
+    variable "enable_classiclink" {
+        default = "false"
+    }
+
+    variable "enable_classiclink_dns_support" {
+        default = "false"
+    }
+
+    provider "aws" {
+    region = var.region
+    }
+
+    # Create VPC
+    resource "aws_vpc" "main" {
+    cidr_block                     = var.vpc_cidr
+    enable_dns_support             = var.enable_dns_support 
+    enable_dns_hostnames           = var.enable_dns_support
+    enable_classiclink             = var.enable_classiclink
+    enable_classiclink_dns_support = var.enable_classiclink
+
+    }
+ ```
+
+Terraform has a functionality that allows us to pull data which exposes information to us. For example, every region has Availability Zones (AZ). Different regions have from 2 to 4 Availability Zones. With over 20 geographic regions and over 70 AZs served by AWS, it is impossible to keep up with the latest information by hard coding the names of AZs
+
+```
+# Get list of availability zones
+data "aws_availability_zones" "available" {
+   state = "available"
+}
+```
+
+```
+# Get list of availability zones
+data "aws_availability_zones" "available" {
+    state = "available"
+}
+```
+
+
 
 [darey.io](https://www.darey.io/docs/project-16-introduction/)
 
