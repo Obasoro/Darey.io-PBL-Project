@@ -37,11 +37,58 @@ variable "tags" {
 
 ```
 
-
 ```
 variable "tags" {
   description = "A mapping of tags to assign to all resources."
   type        = map(string)
   default     = {}
 }
+```
+
+## Internet Gateways & format() function
+
+```
+resource "aws_internet_gateway" "ig" {
+  vpc_id = aws_vpc.main.id
+
+  tags = merge(
+    var.tags,
+    {
+      Name = format("%s-%s!", aws_vpc.main.id,"IG")
+    } 
+  )
+}
+
+```
+
+## NAT Gateways
+
+Create 1 NAT Gateways and 1 Elastic IP (EIP) addresses
+
+```
+resource "aws_eip" "nat_eip" {
+  vpc        = true
+  depends_on = [aws_internet_gateway.ig]
+
+  tags = merge(
+    var.tags,
+    {
+      Name = format("%s-EIP", var.name)
+    },
+  )
+}
+
+resource "aws_nat_gateway" "nat" {
+  allocation_id = aws_eip.nat_eip.id
+  subnet_id     = element(aws_subnet.public.*.id, 0)
+  depends_on    = [aws_internet_gateway.ig]
+
+  tags = merge(
+    var.tags,
+    {
+      Name = format("%s-Nat", var.name)
+    },
+  )
+}
+
 ```
