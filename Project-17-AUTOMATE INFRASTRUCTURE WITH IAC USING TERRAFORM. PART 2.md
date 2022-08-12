@@ -65,6 +65,8 @@ resource "aws_internet_gateway" "ig" {
 
 Create 1 NAT Gateways and 1 Elastic IP (EIP) addresses
 
+We need to create an Elastic IP for the NAT Gateway, and you can see the use of depends_on to indicate that the Internet Gateway resource must be available before this should be created. Although Terraform does a good job to manage dependencies, but in some cases, it is good to be explicit.
+
 ```
 resource "aws_eip" "nat_eip" {
   vpc        = true
