@@ -646,4 +646,4 @@ resource "aws_sns_topic" "david-sns" {
 name = "Default_CloudWatch_Alarms_Topic"
 }
 ```
-
+## STORAGE AND DATABASE
