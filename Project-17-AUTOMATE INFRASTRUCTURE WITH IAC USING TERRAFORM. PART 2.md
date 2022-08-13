@@ -634,4 +634,16 @@ resource "aws_lb_listener_rule" "tooling-listener" {
   }
 }
 
+## CREATING AUSTOALING GROUPS
+
+Based on our Architetcture we need for Auto Scaling Groups for bastion, nginx, wordpress and tooling, so we will create two files; asg-bastion-nginx.tf will contain Launch Template and Austoscaling froup for Bastion and Nginx, then asg-wordpress-tooling.tf will contain Launch Template and Austoscaling group for wordpress and tooling.
+
+Create asg-bastion-nginx.tf and paste all the code snippet below;
+
+```
+#### creating sns topic for all the auto scaling groups
+resource "aws_sns_topic" "david-sns" {
+name = "Default_CloudWatch_Alarms_Topic"
+}
+```
 
