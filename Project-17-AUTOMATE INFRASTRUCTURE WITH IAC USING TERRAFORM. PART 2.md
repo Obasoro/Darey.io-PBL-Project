@@ -772,7 +772,8 @@ resource "aws_db_subnet_group" "ACS-rds" {
     },
   )
 }
-
+```
+```
 # create the RDS instance with the subnets group
 resource "aws_db_instance" "ACS-rds" {
   allocated_storage      = 20
@@ -780,9 +781,9 @@ resource "aws_db_instance" "ACS-rds" {
   engine                 = "mysql"
   engine_version         = "5.7"
   instance_class         = "db.t2.micro"
-  name                   = "daviddb"
-  username               = var.master-username
-  password               = var.master-password
+  name                   = "kunledb"
+  username               = var.db-username
+  password               = var.db-password
   parameter_group_name   = "default.mysql5.7"
   db_subnet_group_name   = aws_db_subnet_group.ACS-rds.name
   skip_final_snapshot    = true
