@@ -667,7 +667,7 @@ resource "aws_kms_key" "ACS-kms" {
     {
       "Sid": "Enable IAM User Permissions",
       "Effect": "Allow",
-      "Principal": { "AWS": "arn:aws:iam::${var.account_no}:user/segun" },
+      "Principal": { "AWS": "arn:aws:iam::${var.account_no}:user/kunle" },
       "Action": "kms:*",
       "Resource": "*"
     }
@@ -682,6 +682,7 @@ resource "aws_kms_alias" "alias" {
   target_key_id = aws_kms_key.ACS-kms.key_id
 }
 ```
+                      
 To mount this, we need to create filesystem
 ```
 # create Elastic file system
