@@ -656,6 +656,7 @@ Useful Terraform Documentation, go through this documentation and understand the
 ## Create Elastic File System (EFS)
 
 ```
+```
 # create key from key management system
 resource "aws_kms_key" "ACS-kms" {
   description = "KMS key "
