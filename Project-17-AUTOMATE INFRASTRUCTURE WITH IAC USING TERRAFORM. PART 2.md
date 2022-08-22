@@ -682,7 +682,7 @@ resource "aws_kms_alias" "alias" {
   target_key_id = aws_kms_key.ACS-kms.key_id
 }
 ```
-To mount this, we a
+To mount this, we need to create filesystem
 ```
 # create Elastic file system
 resource "aws_efs_file_system" "ACS-efs" {
@@ -773,6 +773,7 @@ resource "aws_db_subnet_group" "ACS-rds" {
   )
 }
 ```
+                      
 ```
 # create the RDS instance with the subnets group
 resource "aws_db_instance" "ACS-rds" {
