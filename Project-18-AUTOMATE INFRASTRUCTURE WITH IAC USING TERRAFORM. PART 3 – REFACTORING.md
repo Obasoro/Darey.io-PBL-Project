@@ -7,3 +7,12 @@
 The above architecture is to carried out using terraform ans was done in Project-16 and 17 respectively. 
 But in this project, we would be sung modules and s3 bucket as backend configuration.
 
+Here is our plan to Re-initialize Terraform to use S3 backend:
+
+- Add S3 and DynamoDB resource blocks before deleting the local state file
+- Update terraform block to introduce backend and locking
+- Re-initialize terraform
+- Delete the local tfstate file and check the one in S3 bucket
+- Add outputs
+- terraform apply
+
