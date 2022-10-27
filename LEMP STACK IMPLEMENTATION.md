@@ -289,6 +289,10 @@ You can now access this page in your web browser by visiting the domain name or 
 This project was done using the materials from [Darey.io](https://www.darey.io/)
 
 
+## Remove mysql
+
+[digitalocean](https://www.digitalocean.com/community/questions/completely-uninstall-mysql-server)
+
 
  
 
