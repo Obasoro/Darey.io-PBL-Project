@@ -94,3 +94,37 @@ For repetitive blocks of code you can use dynamic blocks in Terraform.
 
 ### EC2 refactoring with Map and Lookup
 
+Remember, every piece of work you do, always try to make it dynamic to accommodate future changes. Amazon Machine Image (AMI) is a regional service which means it is only available in the region it was created. But what if we change the region later, and want to dynamically pick up AMI IDs based on the available AMIs in that region? This is where we will introduce Map and Lookup functions.
+
+```
+variable "images" {
+    type = "map"
+    default = {
+        us-east-1 = "image-1234"
+        us-west-2 = "image-23834"
+    }
+}
+```
+
+```
+resource "aws_instace" "web" {
+    ami  = "${lookup(var.images, var.region), "ami-12323"}
+}
+```
+
+### REFACTOR YOUR PROJECT USING MODULES
+
+### COMPLETE THE TERRAFORM CONFIGURATION
+
+![image](https://user-images.githubusercontent.com/29310552/199227112-d3f996f6-f8c5-4c78-b094-b9abac5ba875.png)
+
+![image](https://user-images.githubusercontent.com/29310552/199227564-98988db0-416a-4736-b051-1218ea4ecebd.png)
+
+![image](https://user-images.githubusercontent.com/29310552/199227667-59ef457d-8a4a-4f26-975c-6ea23f6e7e47.png)
+
+
+
+
+
+
+
