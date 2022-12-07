@@ -14,3 +14,8 @@ Create a new repository in your GitHub and call it terraform-cloud, push your Te
 
 Choose version control workflow and you will be promped to connect your GitHub account to your workspace – follow the prompt and add your newly created repository to the workspace.
 
+4. Configure variables
+Terraform Cloud supports two types of variables: environment variables and Terraform variables. Either type can be marked as sensitive, which prevents them from being displayed in the Terraform Cloud web UI and makes them write-only.
+
+Set two environment variables: AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY,
+
