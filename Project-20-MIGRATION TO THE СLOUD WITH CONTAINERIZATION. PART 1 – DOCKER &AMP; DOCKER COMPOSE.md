@@ -15,5 +15,16 @@ Make sure docker is installed on the system(locally or remote server)
 
 `$ docker run --name <container_name> -e MYSQL_ROOT_PASSWORD=<my-secret-pw> -d mysql/mysql-server:latest`
 
+## CONNECTING TO THE MYSQL DOCKER CONTAINER
+
+There are several approaches in connecting the MYSQL container.
+
+- 1. Connecting directly to the container running the MySQL server
+`$ docker exec -it mysql bash
+
+or
+
+$ docker exec -it mysql mysql -uroot -p`
+
 
 
