@@ -112,8 +112,23 @@ Now you need to prepare a database schema so that the Tooling application can co
 
 1. Clone the Tooling-app repository from
 `$ $ git clone https://github.com/darey-devops/tooling.git`
+
 2. On your terminal, export the location of the SQL file
+
 `$ export tooling_db_schema=/tooling_db_schema.sql`
 
+3. Use the SQL script to create the database and prepare the schema. With the docker exec command, you can execute a command in a running container.
 
+`docker exec -i mysql-server mysql -uroot -p$MYSQL_PW < $tooling_db_schema`
+
+4. Update the .env file with connection details to the database
+
+`$ vi .env`
+
+Flags used:
+
+MYSQL_IP mysql ip address "leave as mysqlserverhost"
+MYSQL_USER mysql username for user export as environment variable
+MYSQL_PASS mysql password for the user exported as environment varaible
+MYSQL_DBNAME mysql databse name "toolingdb"
 
