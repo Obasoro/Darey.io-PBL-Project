@@ -72,6 +72,10 @@ If the image is not found locally, it will be downloaded from the registry.
 
 Verify the container is running:
 
+![image](https://user-images.githubusercontent.com/29310552/210399390-c97d0209-96f7-4b4d-b5ae-29d885cbaf0b.png)
+
+As you already know, it is best practice not to connect to the MySQL server remotely using the root user. Therefore, we will create an SQL script that will create a user we can use to connect remotely
+
 
 
 
