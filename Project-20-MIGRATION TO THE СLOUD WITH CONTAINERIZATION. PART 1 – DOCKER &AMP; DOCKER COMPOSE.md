@@ -34,13 +34,20 @@ Finally, change the server root password to protect your database. Exit the the 
 Flags used
 
 exec used to execute a command from bash itself
--it makes the execution interactive and allocate a pseudo-TTY
+ -it makes the execution interactive and allocate a pseudo-TTY
 bash this is a unix shell and its used as an entry-point to interact with our container
 mysql The second mysql in the command "docker exec -it mysql mysql -uroot -p" serves as the entry point to interact with mysql container just like bash or sh
--u mysql username
--p mysql password
+ -u mysql username
+ -p mysql password
 
 - 2. At this stage you are now able to create a docker container but we will need to add a network. So, stop and remove the previous mysql docker container.
 The best practice is to store our password as enviroment variable and create our network environment.
+
+First, create a network:
+
+`$ docker network create --subnet=172.18.0.0/24 tooling_app_network
+
+![image](https://user-images.githubusercontent.com/29310552/210391701-8706cb1b-d2d6-4aff-843b-f9ae81075463.png)
+
 
 
