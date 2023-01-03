@@ -45,9 +45,36 @@ The best practice is to store our password as enviroment variable and create our
 
 First, create a network:
 
-`$ docker network create --subnet=172.18.0.0/24 tooling_app_network
+`$ docker network create --subnet=172.18.0.0/24 tooling_app_network`
 
 ![image](https://user-images.githubusercontent.com/29310552/210391701-8706cb1b-d2d6-4aff-843b-f9ae81075463.png)
+
+You can check your network `docker network ls`
+
+Creating a custom network is not necessary because even if we do not create a network, Docker will use the default network for all the containers you run. By default, the network we created above is of DRIVER Bridge. So, also, it is the default network
+
+1. Let create a passowrd environment variable
+`$ export MYSQL_PW=<password>`
+
+`$ echo $MYSQL_PW`
+
+2. `$ docker run --network tooling_app_network -h mysqlserverhost --name=mysql-server -e MYSQL_ROOT_PASSWORD=$MYSQL_PW  -d mysql/mysql-server:latest`
+
+![image](https://user-images.githubusercontent.com/29310552/210393778-32597941-3aac-44fa-8273-a33a05dad80f.png)
+
+
+Flags used
+
+-d runs the container in detached mode
+--network connects a container to a network
+-h specifies a hostname
+If the image is not found locally, it will be downloaded from the registry.
+
+Verify the container is running:
+
+
+
+
 
 
 
