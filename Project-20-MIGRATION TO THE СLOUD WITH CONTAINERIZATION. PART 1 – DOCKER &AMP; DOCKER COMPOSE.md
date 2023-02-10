@@ -135,4 +135,19 @@ MYSQL_DBNAME mysql databse name "toolingdb"
 
 ![image](https://user-images.githubusercontent.com/29310552/217996724-be909a7d-beb0-4c2d-8cb3-f36fcc3e8342.png)
 
+## PRACTICE TASK 1
+
+Practice Task №1 – Implement a POC to migrate the PHP-Todo app into a containerized application.Download php-todo repository from here
+
+The project below will challenge you a little bit, but the experience there is very valuable for future projects.
+
+Part 1
+Write a Dockerfile for the TODO app
+Run both database and app on your laptop Docker Engine
+Access the application from the browser
+
+
+
+
+
 
