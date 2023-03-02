@@ -145,3 +145,28 @@ Verify the kubectl version installed
 `kubectl version --client`
 
 ![image](https://user-images.githubusercontent.com/29310552/222460743-bb19b806-bc61-4bff-adc2-4e50b8af4866.png)
+
+## Install CFSSL and CFSSLJSON
+
+cfssl is an open source tool by Cloudflare used to setup a Public Key Infrastructure (PKI Infrastructure) for generating, signing and bundling TLS certificates. In previous projects you have experienced the use of Letsencrypt for the similar use case. Here, cfssl will be configured as a Certificate Authority which will issue the certificates required to spin up a Kubernetes cluster.
+
+### Install for linux
+
+`$ wget -q --show-progress --https-only --timestamping \
+  https://storage.googleapis.com/kubernetes-the-hard-way/cfssl/1.4.1/linux/cfssl \
+  https://storage.googleapis.com/kubernetes-the-hard-way/cfssl/1.4.1/linux/cfssljson`
+  
+ `# $ chmod +x cfssl cfssljson`
+ 
+ `$ sudo mv cfssl cfssljson /usr/local/bin/`
+ 
+ ### nstall for Mac
+ `curl -o cfssl https://storage.googleapis.com/kubernetes-the-hard-way/cfssl/1.4.1/darwin/cfssl
+curl -o cfssljson https://storage.googleapis.com/kubernetes-the-hard-way/cfssl/1.4.1/darwin/cfssljson`
+
+`chmod +x cfssl cfssljson`
+
+`sudo mv cfssl cfssljson /usr/local/bin/`
+
+# or
+` brew install cfssl`
