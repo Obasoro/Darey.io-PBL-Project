@@ -61,3 +61,87 @@ As mentioned earlier, there are other alternatives to Docker Compose. But, throu
 
 To know when to choose between Docker Swarm and Kubernetes, Here is an interesting article to read with some very enlightening stats.
 
+Install and configure master (also known as control plane) components and worker nodes (or just nodes).
+Apply security settings across the entire cluster (i.e., encrypting the data in transit, and at rest)
+In transit encryption means encrypting communications over the network using HTTPS
+At rest encryption means encrypting the data stored on a disk
+Plan the capacity for the backend data store etcd
+Configure network plugins for the containers to communicate
+Manage periodical upgrade of the cluster
+Configure observability and auditing
+
+<bold>Note</bold>: Unless you have any business or compliance restrictions, ALWAYS consider to use managed versions of K8s – Platform as a Service offerings, such as Azure Kubernetes Service (AKS), Amazon Elastic Kubernetes Service (Amazon EKS), or Google Kubernetes Engine (GKE) as they usually have better default security settings, and the costs for maintaining the control plane are very low.
+
+You will be able to appreciate automation tools and managed versions of Kubernetes much more after you have experienced all the lessons from the struggles and failures from the "K8s From-Ground-Up".
+
+Let us begin building out Kubernetes cluster from the ground
+DISCLAIMER: The following setup of Kubernetes should be used for learning purpose only, and not to be considered for production. This is because setting up a K8s cluster for production use has a lot more moving parts, especially when it comes to planning the nodes, and securing the cluster. The purpose of "K8s From-Ground-Up" is to get you much closer to the different components as shown in the architecture diagram and relate with what you have been learning about Kubernetes.
+
+Tools to be used and expected result of the Project 20
+VM: AWS EC2
+OS: Ubuntu 20.04 lts+
+Docker Engine
+kubectl console utility
+cfssl and cfssljson utilities
+Kubernetes cluster
+You will create 3 EC2 Instances, and in the end, we will have the following parts of the cluster properly configured:
+
+One Kubernetes Master
+Two Kubernetes Worker Nodes
+Configured SSL/TLS certificates for Kubernetes components to communicate securely
+Configured Node Network
+Configured Pod Network
+
+# STEP 0-INSTALL CLIENT TOOLS BEFORE BOOTSTRAPPING THE CLUSTER.
+
+Test your AWS CLI by running
+
+`aws ec2 describe-vpcs`
+
+```
+{
+    "Vpcs": [
+        {
+            "CidrBlock": "172.31.0.0/16",
+            "DhcpOptionsId": "dopt-0d6afa67674f6b14d",
+            "State": "available",
+            "VpcId": "vpc-*********",
+            "OwnerId": "*********",
+            "InstanceTenancy": "default",
+            "CidrBlockAssociationSet": [
+                {
+                    "AssociationId": "vpc-cidr-assoc-0d24fa994d9a6c343",
+                    "CidrBlock": "172.31.0.0/16",
+                    "CidrBlockState": {
+                        "State": "associated"
+                    }
+                }
+            ],
+            "IsDefault": true
+        }
+    ]
+}
+
+```
+
+Kubernetes cluster has a Web API that can receive HTTP/HTTPS requests, but it is quite cumbersome to curl an API each and every time you need to send some command, so kubectl command tool was developed to ease a K8s administrator’s life.
+
+With this tool you can easily interact with Kubernetes to deploy applications, inspect and manage cluster resources, view logs and perform many more administrative operations.
+
+# Installing kubectl
+
+`wget https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kubectl`
+
+Make it executable
+
+`$ chmod +x kubectl`
+
+Move to the Bin directory
+
+`$ sudo mv kubectl /usr/local/bin/`
+
+Verify the kubectl version installed
+
+`kubectl version --client`
+
+![image](https://user-images.githubusercontent.com/29310552/222460743-bb19b806-bc61-4bff-adc2-4e50b8af4866.png)
