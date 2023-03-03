@@ -414,3 +414,14 @@ aws elbv2 create-listener \
 --output text --query 'Listeners[].ListenerArn'
 
 ```
+
+## K8s Public Address
+
+18 Get the Kubernetes Public address
+
+```
+KUBERNETES_PUBLIC_ADDRESS=$(aws elbv2 describe-load-balancers \
+--load-balancer-arns ${LOAD_BALANCER_ARN} \
+--output text --query 'LoadBalancers[].DNSName')
+
+```
