@@ -205,3 +205,39 @@ aws ec2 modify-vpc-attribute \
 --vpc-id ${VPC_ID} \
 --enable-dns-support '{"Value": true}'
 ```
+5. Enable DNS support for hostnames:
+
+```
+aws ec2 modify-vpc-attribute \
+--vpc-id ${VPC_ID} \
+--enable-dns-hostnames '{"Value": true
+```
+
+![image](https://user-images.githubusercontent.com/29310552/222602644-695268cc-30c0-4f32-9f2e-c04464c86ffd.png)
+
+## AWS Region
+
+6.Set the required region
+```
+AWS_REGION=us-east-1
+
+```
+## Dynamic Host Configuration Protocol – DHCP
+
+7. Configure DHCP Options Set:
+
+Dynamic Host Configuration Protocol (DHCP) is a network management protocol used on Internet Protocol networks for automatically assigning IP addresses and other communication parameters to devices connected to the network using a client–server architecture.
+
+```
+DHCP_OPTION_SET_ID=$(aws ec2 create-dhcp-options \
+  --dhcp-configuration \
+    "Key=domain-name,Values=$AWS_REGION.compute.internal" \
+    "Key=domain-name-servers,Values=AmazonProvidedDNS" \
+  --output text --query 'DhcpOptions.DhcpOptionsId')
+  
+```
+
+8. Tag the DHCP Option set:
+
+
+
