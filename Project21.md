@@ -445,3 +445,88 @@ IMAGE_ID=$(aws ec2 describe-images --owners 099720109477 \
 
 ## Install jq
 `$sudo apt-get install jq`
+
+## SSH key-pair
+
+2. Create SSH Key-Pair
+
+```
+mkdir -p ssh
+
+aws ec2 create-key-pair \
+  --key-name ${NAME} \
+  --output text --query 'KeyMaterial' \
+  > ssh/${NAME}.id_rsa
+chmod 600 ssh/${NAME}.id_rsa
+
+```
+## EC2 Instances for Controle Plane (Master Nodes)
+
+3(a). Create 3 Master nodes: Note – Using t2.micro instead of t2.small as t2.micro is covered by AWS free tier
+
+```
+for i in 0 1 2; do
+  instance_id=$(aws ec2 run-instances \
+    --associate-public-ip-address \
+    --image-id ${IMAGE_ID} \
+    --count 1 \
+    --key-name ${NAME} \
+    --security-group-ids ${SECURITY_GROUP_ID} \
+    --instance-type t2.micro \
+    --private-ip-address 172.31.0.1${i} \
+    --user-data "name=master-${i}" \
+    --subnet-id ${SUBNET_ID} \
+    --output text --query 'Instances[].InstanceId')
+  aws ec2 modify-instance-attribute \
+    --instance-id ${instance_id} \
+    --no-source-dest-check
+  aws ec2 create-tags \
+    --resources ${instance_id} \
+    --tags "Key=Name,Value=${NAME}-master-${i}"
+done
+
+```
+
+![image](https://user-images.githubusercontent.com/29310552/224702183-e6f43107-6aa1-4840-bb4e-674783545e24.png)
+
+## EC2 Instances for Worker Nodes
+
+3(b). reate 3 worker nodes:
+
+```
+
+for i in 0 1 2; do
+  instance_id=$(aws ec2 run-instances \
+    --associate-public-ip-address \
+    --image-id ${IMAGE_ID} \
+    --count 1 \
+    --key-name ${NAME} \
+    --security-group-ids ${SECURITY_GROUP_ID} \
+    --instance-type t2.micro \
+    --private-ip-address 172.31.0.2${i} \
+    --user-data "name=worker-${i}|pod-cidr=172.20.${i}.0/24" \
+    --subnet-id ${SUBNET_ID} \
+    --output text --query 'Instances[].InstanceId')
+  aws ec2 modify-instance-attribute \
+    --instance-id ${instance_id} \
+    --no-source-dest-check
+  aws ec2 create-tags \
+    --resources ${instance_id} \
+    --tags "Key=Name,Value=${NAME}-worker-${i}"
+done
+
+```
+
+![image](https://user-images.githubusercontent.com/29310552/224704135-6799deca-1bd3-46be-a490-03037a8714c4.png)
+
+# STEP 3 PREPARE THE SELF-SIGNED CERTIFICATE AUTHORITY AND GENERATE TLS CERTIFICATES
+
+Step 3 Prepare The Self-Signed Certificate Authority And Generate TLS Certificates
+
+## Self-Signed Root Certificate Authority (CA)
+
+Create a directory and cd into it
+
+`mkdir ca-authority && cd ca-authority`
+
+
