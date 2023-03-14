@@ -1077,3 +1077,51 @@ Notice that the --server is set to use 127.0.0.1. This is because, this componen
   kubectl config use-context default --kubeconfig=admin.kubeconfig
 }
 ```
+Distribute the files to their respective servers, 
+using scp and a for loop like we have done previously. 
+This is a test to validate that you understand which component.
+
+```
+for i in 0 1 2; do
+instance="${NAME}-master-${i}" \
+  external_ip=$(aws ec2 describe-instances \
+    --filters "Name=tag:Name,Values=${instance}" \
+    --output text --query 'Reservations[].Instances[].PublicIpAddress')
+  scp -i ../ssh/${NAME}.id_rsa \
+    ca.pem ca-key.pem service-account-key.pem service-account.pem \
+    master-kubernetes.pem master-kubernetes-key.pem ubuntu@${external_ip}:~/;
+done
+
+```
+![image](https://user-images.githubusercontent.com/29310552/224997722-254edeae-ee9e-421c-b3e3-ebce45a5abb9.png)
+
+# STEP 6 PREPARE THE ETCD DATABASE FOR ENCRYPTION AT REST.
+
+### Generate the encryption key and encode it using base64
+
+`$ETCD_ENCRYPTION_KEY=$(head -c 64 /dev/urandom | base64) `
+
+`$ echo $ETCD_ENCRYPTION_KEY`
+
+`W2BdUoQIcd86twCbrUmgDsPpdIQYdl8uNDMVmnzgfhnQj9RFKlwYTXFylMNDCHxnj7z2fQb053ut
+vD2CELpINQ==`
+
+Create an encryption-config.yaml file as documented officially by kubernetes
+```
+cat > encryption-config.yaml <<EOF
+kind: EncryptionConfig
+apiVersion: v1
+resources:
+  - resources:
+      - secrets
+    providers:
+      - aescbc:
+          keys:
+            - name: key1
+              secret: ${ETCD_ENCRYPTION_KEY}
+      - identity: {}
+EOF
+```
+
+
+
