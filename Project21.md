@@ -882,5 +882,50 @@ cfssl gencert \
 
 ```
 
+# STEP 4 – DISTRIBUTING THE CLIENT AND SERVER CERTIFICATES
+
+Step 4 – Distributing the Client and Server Certificates
+Now it is time to start sending all the client and server certificates to their respective instances.
+
+Let us begin with the worker nodes:
+
+Copy these files securely to the worker nodes using scp utility
+
+```
+for i in 0 1 2; do
+  instance="${NAME}-worker-${i}"
+  external_ip=$(aws ec2 describe-instances \
+    --filters "Name=tag:Name,Values=${instance}" \
+    --output text --query 'Reservations[].Instances[].PublicIpAddress')
+  scp -i ../ssh/${NAME}.id_rsa \
+    ca.pem ${instance}-key.pem ${instance}.pem ubuntu@${external_ip}:~/; \
+done
+
+```
+
+![image](https://user-images.githubusercontent.com/29310552/224980643-e4c36938-1ae8-45f6-8bf0-046602db0404.png)
+
+Master or Controller node: – Note that only the api-server related files will be sent over to the master nodes.
+
+```
+for i in 0 1 2; do
+instance="${NAME}-master-${i}" \
+  external_ip=$(aws ec2 describe-instances \
+    --filters "Name=tag:Name,Values=${instance}" \
+    --output text --query 'Reservations[].Instances[].PublicIpAddress')
+  scp -i ../ssh/${NAME}.id_rsa \
+    ca.pem ca-key.pem service-account-key.pem service-account.pem \
+    master-kubernetes.pem master-kubernetes-key.pem ubuntu@${external_ip}:~/;
+done
+```
+
+
+
+![image](https://user-images.githubusercontent.com/29310552/224981624-e650b371-c9c2-4dac-b230-0e4563d36905.png)
+
+# STEP 5 USE `KUBECTL` TO GENERATE KUBERNETES CONFIGURATION FILES FOR AUTHENTICATION
+
+1. Generate the kubelet kubeconfig file
+
 
 
