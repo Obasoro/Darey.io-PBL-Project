@@ -1123,5 +1123,5 @@ resources:
 EOF
 ```
 
-
+1. SSH into the controller server
 
