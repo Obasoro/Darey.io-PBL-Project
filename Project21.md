@@ -1125,3 +1125,55 @@ EOF
 
 1. SSH into the controller server
 
+```
+for i in 0 1 2; do
+  instance="${NAME}-master-${i}"
+  external_ip=$(aws ec2 describe-instances \
+    --filters "Name=tag:Name,Values=${instance}" \
+    --output text --query 'Reservations[].Instances[].PublicIpAddress')
+  scp -i ../ssh/${NAME}.id_rsa \
+    ca.pem ca-key.pem service-account-key.pem service-account.pem \
+     master-kubernetes.pem master-kubernetes-key.pem ubuntu@${external_ip}:~/;
+```
+
+2. Download and install etcd
+
+```
+
+wget -q --show-progress --https-only --timestamping \
+  "https://github.com/etcd-io/etcd/releases/download/v3.4.15/etcd-v3.4.15-linux-amd64.tar.gz"
+```
+
+3. Extract and install the etcd server and the etcdctl command line utility
+
+```
+{
+tar -xvf etcd-v3.4.15-linux-amd64.tar.gz
+sudo mv etcd-v3.4.15-linux-amd64/etcd* /usr/local/bin/
+}
+
+```
+
+4. Configure the etcd server
+
+```
+
+{
+  sudo mkdir -p /etc/etcd /var/lib/etcd
+  sudo chmod 700 /var/lib/etcd
+  sudo cp ca.pem master-kubernetes-key.pem master-kubernetes.pem /etc/etcd/
+}
+```
+
+
+
+
+
+
+
+
+
+```
+echo $(hostname -I | cut -d\  -f1) $(hostname) | sudo -h 127.0.0.1 tee -a /etc/hosts
+
+```
