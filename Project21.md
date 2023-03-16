@@ -1165,6 +1165,33 @@ sudo mv etcd-v3.4.15-linux-amd64/etcd* /usr/local/bin/
 }
 ```
 
+5. The instance internal IP address will be used to serve client requests and communicate with etcd cluster peers. Retrieve the internal IP address for the current compute instance
+
+```
+export INTERNAL_IP=$(curl -s http://169.254.169.254/latest/meta-data/local-ipv4)
+
+```
+
+6. Each etcd member must have a unique name within an etcd cluster. Set the etcd name to node Private IP address so it will uniquely identify the machine:
+
+```
+ETCD_NAME=$(curl -s http://169.254.169.254/latest/user-data/ \
+  | tr "|" "\n" | grep "^name" | cut -d"=" -f2)
+
+echo ${ETCD_NAME}
+
+```
+
+![image](https://user-images.githubusercontent.com/29310552/225665937-b88aa987-1ea6-4ae4-948d-0a317a595e5f.png)
+
+![image](https://user-images.githubusercontent.com/29310552/225666162-8ee56b95-6385-4b0e-a137-3ef674d2bf35.png)
+
+![image](https://user-images.githubusercontent.com/29310552/225666317-194121d5-87db-4382-89fc-34492fe19697.png)
+
+
+
+
+
 
 
 
