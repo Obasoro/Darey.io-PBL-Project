@@ -1134,6 +1134,7 @@ for i in 0 1 2; do
   scp -i ../ssh/${NAME}.id_rsa \
     ca.pem ca-key.pem service-account-key.pem service-account.pem \
      master-kubernetes.pem master-kubernetes-key.pem ubuntu@${external_ip}:~/;
+done
 ```
 
 2. Download and install etcd
