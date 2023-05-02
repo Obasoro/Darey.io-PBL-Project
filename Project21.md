@@ -1122,6 +1122,20 @@ resources:
       - identity: {}
 EOF
 ```
+Copy the `Encryption file` over into the master nodes
+
+```
+for i in 0 1 2; do
+instance="${NAME}-master-${i}" \
+  external_ip=$(aws ec2 describe-instances \
+    --filters "Name=tag:Name,Values=${instance}" \
+    --output text --query 'Reservations[].Instances[].PublicIpAddress')
+  scp -i ../ssh/${NAME}.id_rsa \
+    encryption-config.yaml ubuntu@${external_ip}:~/;
+done
+
+```
+
 
 1. SSH into the controller server
 
