@@ -1471,3 +1471,4 @@ Check the status of the services. Start with the kube-scheduler and kube-control
 echo $(hostname -I | cut -d\  -f1) $(hostname) | sudo -h 127.0.0.1 tee -a /etc/hosts
 
 ```
+## TEST THAT EVERYTHING IS WORKING FINE
