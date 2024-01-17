@@ -141,7 +141,6 @@ The best practise is to schedule a the renewal date
 
 `$ crontab -e`
 
-This tutorial was carried with help of materials from [Darey.io](https://www.darey.io/docs/configure-nginx-as-a-load-balancer/) and othe materials from the internet
 
 
 
