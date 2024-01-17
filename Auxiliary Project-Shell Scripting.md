@@ -119,8 +119,7 @@ Test with another name in the names.csv file
 <img width="577" alt="anoth-user ssh" src="https://user-images.githubusercontent.com/29310552/153318507-4bbff864-20b9-4b23-9bc1-f450ebed3fe4.PNG">
 
 
-[Darey.io](https://www.youtube.com/watch?v=NysMJ9rhVIU)
-[Darey.io](https://www.darey.io/docs/aux-project-1-shell-scripting/)
+
 
 
 
